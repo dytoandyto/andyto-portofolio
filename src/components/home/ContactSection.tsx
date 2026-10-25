@@ -25,7 +25,7 @@ export function ContactSection() {
   };
 
   return (
-    <section className="py-28 md:py-40 bg-[#111210] relative overflow-hidden editorial-grain">
+    <section id="contact" className="py-28 md:py-40 bg-[#111210] relative overflow-hidden editorial-grain">
       {/* Decorative ambient subtle glow */}
       <div
         className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#D4FF69]/5 blur-[120px] pointer-events-none"
@@ -33,13 +33,7 @@ export function ContactSection() {
       />
 
       <Container>
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={containerStaggerVariants}
-          className="max-w-4xl mx-auto text-center space-y-8 relative z-10"
-        >
+        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
           <motion.div variants={fadeInUpVariants}>
             <Eyebrow dotColor="lime" className="justify-center">
               Initiate Collaboration
@@ -131,7 +125,7 @@ export function ContactSection() {
               More contact options →
             </Button>
           </motion.div>
-        </motion.div>
+        </div>
       </Container>
     </section>
   );

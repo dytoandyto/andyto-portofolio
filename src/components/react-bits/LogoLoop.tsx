@@ -1191,7 +1191,7 @@ export const LogoLoop = memo<LogoLoopProps>(
 
     const lists = useMemo(() => {
       const itemClass = cx(
-        'group/item relative flex-none text-[length:var(--logoloop-logoHeight)] leading-none group-data-[intro]/loop:opacity-0',
+        'group/item relative flex-none text-[length:var(--logoloop-logoHeight)] leading-none',
         vertical ? 'mb-[var(--logoloop-gap)]' : 'mr-[var(--logoloop-gap)]'
       );
       const contentClass = (item: LogoItem) =>

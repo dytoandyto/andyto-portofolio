@@ -1,110 +1,41 @@
-# CRAFTED DIGITAL — MASTER DESIGN SYSTEM
-**Author & Subject:** Andyto · Product-minded Software Engineer  
-**Role & Disciplines:** Frontend Engineering, UI/UX Implementation, Full-Stack Product Engineering  
-**Archetype:** The Thoughtful Builder  
-**Core Thesis:** "I turn complex ideas into thoughtful digital products."
+# Andyto Portfolio Design System: Master Specification V2
+
+## 1. Brand Identity & Positioning
+- **Brand:** Andyto
+- **Positioning:** Product-minded Software Engineer & Digital Product Builder
+- **Core Aesthetic:** Technical, elegant, modern, confident, crafted digital excellence
+- **Tone:** Motion-led editorial, high contrast, clean typography, restraint over decorative excess
 
 ---
 
-## 1. Visual Concept & Art Direction
-
-"Crafted Digital" pairs the typographic rigor and pacing of a high-end editorial publication with the precision of a modern systems engineering studio.
-
-### Core Principles
-1. **Editorial Contrast & Pacing**: Instead of monotonous monochrome or generic dark-mode cards with purple glows, sections transition deliberately between deep ink (`#111210`) and warm ivory (`#F2F0E9`).
-2. **Typography as Architecture**: Expressive headlines using fluid typography (`clamp(...)`), paired with monospaced metadata labels and readable body prose.
-3. **Restrained Technical Accents**: Signal Lime (`#D4FF69`) is used surgically for live availability indicators, active filters, and key highlights — never as ubiquitous neon noise.
-4. **Authentic Evidence over SaaS Tropes**: No fake testimonials, no artificial skill percentage bars, no arbitrary bento grids, and no stock photography. Interface previews are designed to honestly represent real software architecture.
-
----
-
-## 2. Design Tokens
-
-### Color Palette
-```css
-:root {
-  /* Dark / Ink Anchor */
-  --color-ink: #111210;
-  --color-ink-soft: #1A1B18;
-  --color-ink-card: #20221E;
-  --color-ink-card-hover: #262823;
-  --color-border-dark: rgba(242, 240, 233, 0.12);
-  --color-border-dark-strong: rgba(242, 240, 233, 0.24);
-  --color-muted-dark: #8E9086;
-
-  /* Warm Ivory / Editorial Anchor */
-  --color-ivory: #F2F0E9;
-  --color-paper: #E7E4DB;
-  --color-paper-card: #DEDAD0;
-  --color-border-light: rgba(17, 18, 16, 0.12);
-  --color-border-light-strong: rgba(17, 18, 16, 0.24);
-  --color-muted-light: #6E7067;
-
-  /* Signal & Focus */
-  --color-lime: #D4FF69;
-  --color-lime-glow: rgba(212, 255, 105, 0.2);
-  --color-focus: #B6DB61;
-
-  /* Typography Stacks */
-  --font-display: var(--font-space-grotesk), var(--font-geist-sans), -apple-system, sans-serif;
-  --font-body: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: var(--font-geist-mono), "IBM Plex Mono", "SF Mono", monospace;
-}
-```
-
-### Contrast Ratios (WCAG 2.2 AA Compliance)
-- Primary text on Ink: `#F2F0E9` on `#111210` = **15.2:1** (AAA)
-- Muted text on Ink: `#8E9086` on `#111210` = **6.8:1** (AA)
-- Primary text on Ivory: `#111210` on `#F2F0E9` = **15.2:1** (AAA)
-- Muted text on Ivory: `#6E7067` on `#F2F0E9` = **4.9:1** (AA)
-- Signal Lime text on Ink: `#D4FF69` on `#111210` = **13.5:1** (AAA)
+## 2. Color Palette & Surface Tokens
+| Token | Value | Role |
+| :--- | :--- | :--- |
+| `color-base` | `#111210` | Primary dark ink canvas base |
+| `color-surface` | `#181916` | Card backgrounds, elevated modules |
+| `color-surface-hover` | `#21231E` | Hovered surface state |
+| `color-border` | `rgba(242, 240, 233, 0.10)` | Default subtle borders |
+| `color-border-hover` | `rgba(242, 240, 233, 0.22)` | Interactive card hover borders |
+| `color-text-primary` | `#F2F0E9` | Warm ivory display headings & primary text |
+| `color-text-secondary`| `#9A9C92` | Subheadings, editorial body narrative |
+| `color-text-muted` | `#8E9086` | Technical mono tags, timestamps, indices |
+| `color-accent-lime` | `#D4FF69` | Signal lime interactive accents, dots, focus rings |
+| `color-accent-dim` | `rgba(212, 255, 105, 0.12)` | Spotlight glows, subtle badge backdrops |
 
 ---
 
 ## 3. Typography Hierarchy
-
-| Style | Element / Role | Font Family | Size (Desktop / Mobile) | Weight | Line Height | Tracking |
-|---|---|---|---|---|---|---|
-| **Display 1** | Hero headline | Space Grotesk / Geist | clamp(2.5rem, 5.5vw, 4.75rem) | 600 | 1.08 | -0.035em |
-| **Display 2** | Section headline | Space Grotesk / Geist | clamp(2rem, 3.5vw, 3rem) | 600 | 1.15 | -0.025em |
-| **Title 1** | Project titles, card titles | Space Grotesk / Geist | clamp(1.25rem, 2vw, 1.75rem) | 600 | 1.25 | -0.02em |
-| **Body Large** | Hero subhead, lead text | Geist / Inter | 1.125rem - 1.25rem | 400 | 1.6 | normal |
-| **Body** | Standard paragraphs | Geist / Inter | 1rem (16px) | 400 | 1.65 | normal |
-| **Body Small** | Captions, card body | Geist / Inter | 0.875rem (14px) | 400 | 1.55 | normal |
-| **Meta / Tag** | Eyebrows, tech stack, dates | Geist Mono | 0.75rem - 0.8125rem | 500 | 1.4 | 0.05em (caps) |
+1. **Primary Font:** `Manrope` (`--font-sans`)
+   - Used for all major page headings, section titles, card headers, body narrative, navigation links, and action buttons.
+2. **Technical Metadata:** `IBM Plex Mono` (`--font-mono`)
+   - Used sparingly for eyebrows, category tags, tech badges, dates, coordinate labels, and code specifications.
+3. **Editorial Highlight Accent:** `Newsreader` italic serif (`--font-serif`)
+   - Used exclusively for small, deliberate single-word highlights (e.g. *"thoughtful"*) to provide editorial warmth.
 
 ---
 
-## 4. Spacing, Grid & Layout
-
-- **Max Content Width**: `1320px` with responsive gutters (`1.25rem` mobile, `2rem` tablet, `3rem` desktop).
-- **Asymmetric 12-Column Grid**: Flexible column distributions (e.g. 5:7 split for Hero and Approach, 4:8 for Project Showcase).
-- **Vertical Rhythm**:
-  - Section vertical padding: `5rem` to `7.5rem` desktop, `3.5rem` to `4.5rem` mobile.
-  - Component gaps: `1.5rem` (card internals), `2.5rem` (sub-blocks), `4rem` (major groups).
-- **Corner Radii**:
-  - Interface panels & project previews: `12px` (subtle, engineered feel).
-  - Badges & small interactive pills: `9999px` (capsules).
-  - Text cards & dividers: `0px` to `8px` (clean editorial edges).
-
----
-
-## 5. Interaction States & Motion Principles
-
-1. **Restrained Entrance**: Hero and sections use subtle 300–500ms opacity and translateY (12px) entrance.
-2. **Hover Micro-interactions**: Smooth transitions (200ms cubic-bezier(0.16, 1, 0.3, 1)) on cards with subtle border highlight and arrow translate (+3px, -3px).
-3. **Accessibility & Reduced Motion**:
-   - Every animation query wraps inside `@media (prefers-reduced-motion: reduce)` or checks Framer/Motion reduced-motion hooks.
-   - Fallbacks immediately render at final resting opacity `1` and transform `none`.
-4. **Visible Focus**: All interactive links and buttons have high-contrast focus rings: `outline: 2px solid var(--color-focus); outline-offset: 3px;`.
-
----
-
-## 6. Anti-Patterns (Strictly Avoided)
-
-- ❌ No generic SaaS purple glow gradients.
-- ❌ No bento grids packed with meaningless metric tiles.
-- ❌ No fake skill bars ("TypeScript: 95%").
-- ❌ No unverified customer logos or fabricated testimonials.
-- ❌ No emoji icons used for UI controls (use clean SVG Lucide icons).
-- ❌ No full-screen curtain page transitions that hinder browser back/forward navigation.
+## 4. Spacing, Radii & Depth
+- **Grid Container:** `max-w-7xl mx-auto px-4 sm:px-6 lg:px-8`
+- **Section Vertical Rhythm:** `py-20 md:py-32`
+- **Border Radii:** `rounded-2xl` (cards, modules), `rounded-3xl` (project showcases, hero container), `rounded-full` (pills, badges)
+- **Shadows:** Multi-layer soft elevation (`shadow-xl`, `shadow-2xl`) combined with 1px translucent borders (`border-[rgba(242,240,233,0.10)]`)

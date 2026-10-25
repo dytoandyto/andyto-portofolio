@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { Manrope, IBM_Plex_Mono } from "next/font/google";
+import { Manrope, IBM_Plex_Mono, Newsreader } from "next/font/google";
 import { siteConfig } from "@/data/site-config";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
+import { SmoothScroll } from "@/components/layout/SmoothScroll";
+import { Aurora } from "@/components/react-bits/Aurora";
 import "./globals.css";
 
 // 1. Primary Typography: Manrope (Headings, Body, Interface, Navigation, Buttons)
@@ -19,6 +21,14 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-mono",
   subsets: ["latin"],
   weight: ["400", "500"],
+  display: "swap",
+});
+
+// 3. Editorial Highlight Accent (Italic Serif): Newsreader
+const newsreader = Newsreader({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  style: ["italic", "normal"],
   display: "swap",
 });
 
@@ -74,15 +84,20 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${manrope.variable} ${ibmPlexMono.variable} dark h-full antialiased`}
+      className={`${manrope.variable} ${ibmPlexMono.variable} ${newsreader.variable} dark h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-[#111210] text-[#F2F0E9] selection:bg-[#D4FF69] selection:text-[#111210]">
-        <ScrollProgress />
-        <SiteHeader />
-        <main id="main-content" className="flex-1 w-full font-sans">
-          {children}
-        </main>
-        <SiteFooter />
+      <body className="min-h-full flex flex-col font-sans bg-[#111210] text-[#F2F0E9] selection:bg-[#D4FF69] selection:text-[#111210] relative">
+        <SmoothScroll>
+          {/* Atmospheric React Bits Aurora background */}
+          <Aurora className="fixed inset-0 z-0 pointer-events-none" opacity={0.32} />
+          
+          <ScrollProgress />
+          <SiteHeader />
+          <main id="main-content" className="flex-1 w-full font-sans relative z-10">
+            {children}
+          </main>
+          <SiteFooter />
+        </SmoothScroll>
       </body>
     </html>
   );

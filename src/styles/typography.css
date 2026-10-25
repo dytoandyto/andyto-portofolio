@@ -1,0 +1,71 @@
+/* ==========================================================================
+   Crafted Digital Design System — Typography Tokens & Scale
+   Primary: Manrope
+   Technical Metadata: IBM Plex Mono
+   Editorial Highlight: Newsreader (Italic Serif)
+   ========================================================================== */
+
+:root {
+  /* Fluid Typographic Scale */
+  --text-display-hero: clamp(2.5rem, 6vw, 4.75rem);
+  --text-display-hero-leading: 1.08;
+  --text-display-hero-tracking: -0.035em;
+
+  --text-section-heading: clamp(2rem, 4.2vw, 3.25rem);
+  --text-section-heading-leading: 1.15;
+  --text-section-heading-tracking: -0.025em;
+
+  --text-card-title: clamp(1.25rem, 2.2vw, 1.85rem);
+  --text-card-title-leading: 1.25;
+  --text-card-title-tracking: -0.02em;
+
+  --text-body-lead: clamp(1.0625rem, 1.4vw, 1.2rem);
+  --text-body-lead-leading: 1.62;
+
+  --text-body-regular: clamp(0.9375rem, 1.15vw, 1.0625rem);
+  --text-body-regular-leading: 1.65;
+
+  --text-body-small: 0.875rem;
+  --text-body-small-leading: 1.55;
+
+  --text-meta-label: clamp(0.72rem, 0.9vw, 0.8125rem);
+  --text-meta-label-leading: 1.4;
+  --text-meta-label-tracking: 0.05em;
+}
+
+/* Typography Utility Classes */
+.font-display {
+  font-family: var(--font-sans, "Manrope", sans-serif);
+  font-feature-settings: normal;
+  letter-spacing: -0.025em;
+}
+
+.font-body {
+  font-family: var(--font-sans, "Manrope", sans-serif);
+  font-feature-settings: normal;
+  line-height: var(--text-body-regular-leading);
+}
+
+.font-editorial-accent {
+  font-family: var(--font-serif, "Newsreader", Georgia, serif);
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.font-mono-meta {
+  font-family: var(--font-mono, "IBM Plex Mono", monospace);
+  letter-spacing: var(--text-meta-label-tracking);
+}
+
+/* Clean Heading Defaults */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans, "Manrope", sans-serif);
+  text-wrap: balance;
+  font-feature-settings: normal;
+}
+
+p {
+  text-wrap: pretty;
+  font-family: var(--font-sans, "Manrope", sans-serif);
+}

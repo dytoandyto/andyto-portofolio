@@ -11,7 +11,7 @@ import {
   containerStaggerVariants,
   fadeInUpVariants,
 } from "@/components/motion/motion-variants";
-import { MapPin } from "lucide-react";
+import { MapPin, Code2, Sparkles, CheckCircle2 } from "lucide-react";
 
 export function ProfileSection() {
   const approaches = [
@@ -24,35 +24,29 @@ export function ProfileSection() {
   return (
     <section
       id="profile"
-      className="py-24 md:py-36 bg-[#161714] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
+      className="py-20 md:py-32 bg-[#141512]/90 border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
     >
       <Container>
         {/* Section Eyebrow & Main Title with Viewport Reveal */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-80px" }}
-          variants={containerStaggerVariants}
-          className="max-w-3xl space-y-4 mb-16"
-        >
-          <motion.div variants={fadeInUpVariants}>
-            <Eyebrow dotColor="lime">02 / PROFILE</Eyebrow>
-          </motion.div>
-          <motion.h2
-            variants={fadeInUpVariants}
-            className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.2]"
-          >
-            A little about the person behind the products<span className="text-[#D4FF69]">.</span>
-          </motion.h2>
-        </motion.div>
+        <div className="max-w-3xl space-y-4 mb-14 sm:mb-16">
+          <div>
+            <Eyebrow dotColor="lime">01 / PROFILE</Eyebrow>
+          </div>
+          <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.15]">
+            The person behind the products<span className="text-[#D4FF69]">.</span>
+          </h2>
+          <p className="text-base sm:text-lg text-[#9A9C92] leading-[1.65] max-w-2xl font-normal">
+            A background rooted in product thinking, systems engineering, and crafting digital experiences with purpose.
+          </p>
+        </div>
 
-        {/* Refined Two-Column Editorial Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          {/* Left Column: React Bits Scroll Reveal Narrative (7 cols) */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="p-8 sm:p-10 rounded-2xl bg-[#111210] border border-[rgba(242,240,233,0.1)] space-y-6 shadow-xl">
+        {/* Responsive Two-Column on Desktop, Single-Column on Mobile */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
+          {/* Main Biography Narrative (7 cols desktop, full width mobile) */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="p-6 sm:p-10 rounded-2xl bg-[#111210] border border-[rgba(242,240,233,0.10)] space-y-6 shadow-xl">
               <span className="font-mono text-xs uppercase tracking-wider text-[#D4FF69] block">
-                Philosophy & Background
+                Philosophy & Engineering Focus
               </span>
 
               {/* React Bits Scroll Reveal component */}
@@ -60,11 +54,11 @@ export function ProfileSection() {
                 I am a software engineer interested in the intersection of thoughtful interfaces, useful products, and reliable systems. I enjoy turning complex ideas into working applications and refining the details that make them easier to understand and use.
               </ScrollRevealText>
 
-              <p className="text-base sm:text-lg text-[#8E9086] leading-[1.65] font-body">
+              <p className="text-base sm:text-lg text-[#9A9C92] leading-[1.65] font-body">
                 Rather than treating engineering and aesthetics as separate workflows, I build applications where type safety, responsive layout formulas, and micro-interactions reinforce each other from day one.
               </p>
 
-              <div className="pt-4 flex flex-wrap items-center gap-4">
+              <div className="pt-2 flex flex-wrap items-center gap-4">
                 <Button href="/about" variant="lime" size="md" icon>
                   More About My Background
                 </Button>
@@ -75,25 +69,16 @@ export function ProfileSection() {
             </div>
           </div>
 
-          {/* Right Column: Profile Specs & Working Approach Cards (5 cols) */}
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-60px" }}
-            variants={containerStaggerVariants}
-            className="lg:col-span-5 space-y-6"
-          >
+          {/* Supporting Specs & Working Approach Cards (5 cols desktop, full width mobile) */}
+          <div className="lg:col-span-5 space-y-6 w-full">
             {/* Core Profile Card */}
-            <motion.div
-              variants={fadeInUpVariants}
-              className="p-6 sm:p-8 rounded-2xl bg-[#181916] border border-[rgba(242,240,233,0.1)] space-y-4 shadow-lg"
-            >
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#181916] border border-[rgba(242,240,233,0.10)] space-y-4 shadow-lg hover:border-[rgba(242,240,233,0.22)] transition-colors">
               <div className="flex items-center justify-between pb-4 border-b border-[rgba(242,240,233,0.08)]">
                 <div>
                   <h3 className="font-display text-xl font-semibold tracking-[-0.02em] text-[#F2F0E9]">
                     {siteConfig.name}
                   </h3>
-                  <p className="font-mono text-xs text-[#D4FF69]">
+                  <p className="font-mono text-xs text-[#D4FF69] mt-0.5">
                     {siteConfig.role}
                   </p>
                 </div>
@@ -113,44 +98,46 @@ export function ProfileSection() {
                 </div>
                 <div className="flex items-center justify-between">
                   <span>Availability:</span>
-                  <span className="text-[#72E58A]">Selected Opportunities</span>
+                  <span className="text-[#D4FF69] flex items-center gap-1.5 font-medium">
+                    <span className="w-2 h-2 rounded-full bg-[#D4FF69] animate-pulse" />
+                    Open to Collaborations
+                  </span>
                 </div>
               </div>
-            </motion.div>
+            </div>
 
             {/* Working Approach Sequence */}
-            <motion.div
-              variants={fadeInUpVariants}
-              className="p-6 sm:p-8 rounded-2xl bg-[#181916] border border-[rgba(242,240,233,0.1)] space-y-4 shadow-lg"
-            >
+            <div className="p-6 sm:p-8 rounded-2xl bg-[#181916] border border-[rgba(242,240,233,0.10)] space-y-4 shadow-lg hover:border-[rgba(242,240,233,0.22)] transition-colors">
               <span className="font-mono text-xs uppercase tracking-wider text-[#8E9086] block">
-                Working Approach
+                Disciplined Working Approach
               </span>
 
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {approaches.map((app) => (
                   <div
                     key={app.step}
-                    className="flex items-start gap-3 p-2.5 rounded-lg bg-[#111210]/60 border border-[rgba(242,240,233,0.06)]"
+                    className="flex items-start gap-3 p-3 rounded-lg bg-[#111210]/60 border border-[rgba(242,240,233,0.06)] hover:border-[rgba(212,255,105,0.25)] transition-colors"
                   >
-                    <span className="font-mono text-xs text-[#D4FF69] bg-[rgba(212,255,105,0.1)] px-1.5 py-0.5 rounded">
+                    <span className="font-mono text-xs text-[#D4FF69] bg-[rgba(212,255,105,0.10)] px-2 py-0.5 rounded font-semibold shrink-0">
                       {app.step}
                     </span>
                     <div>
                       <h4 className="font-display text-sm font-semibold tracking-[-0.01em] text-[#F2F0E9]">
                         {app.name}
                       </h4>
-                      <p className="font-body text-xs text-[#8E9086] leading-relaxed">
+                      <p className="font-body text-xs text-[#8E9086] leading-relaxed mt-0.5">
                         {app.desc}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
-            </motion.div>
-          </motion.div>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
   );
 }
+
+export default ProfileSection;

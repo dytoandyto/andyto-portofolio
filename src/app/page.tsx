@@ -1,5 +1,6 @@
 import React from "react";
 import { HeroSection } from "@/components/home/HeroSection";
+import { TechMarquee } from "@/components/home/TechMarquee";
 import { ProfileSection } from "@/components/home/ProfileSection";
 import { SkillsSection } from "@/components/home/SkillsSection";
 import { ProjectsSection } from "@/components/home/ProjectsSection";
@@ -11,16 +12,19 @@ export default function HomePage() {
       {/* 1. HERO with interactive React Bits Lanyard */}
       <HeroSection />
 
-      {/* 2. PROFILE with React Bits ScrollReveal text */}
+      {/* 2. LOOPING TECHNOLOGY MARQUEE directly under Hero */}
+      <TechMarquee />
+
+      {/* 3. PROFILE with concise biography, philosophy, and approach */}
       <ProfileSection />
 
-      {/* 3. DETAILED SKILLS SECTION with Spotlight Cards & Tech LogoLoop */}
+      {/* 4. CAPABILITIES with React Bits Spotlight Cards */}
       <SkillsSection />
 
-      {/* 4. PROJECTS with Tilted 3D Cards */}
+      {/* 5. SELECTED WORK with React Bits Tilted Cards */}
       <ProjectsSection />
 
-      {/* 5. CONTACT CTA */}
+      {/* 6. CONTACT CTA */}
       <ContactSection />
     </>
   );

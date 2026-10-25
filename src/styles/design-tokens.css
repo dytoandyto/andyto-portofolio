@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Crafted Digital Design System — Core Design Tokens
+   Base Palette: Ink Black, Warm Ivory, Signal Lime
+   ========================================================================== */
+
+:root {
+  /* Ink Palette — Dark Editorial Foundation */
+  --color-ink: #111210;
+  --color-ink-surface: #161714;
+  --color-ink-card: #1c1d1a;
+  --color-ink-card-hover: #242621;
+  --color-border-dark: rgba(242, 240, 233, 0.10);
+  --color-border-dark-strong: rgba(242, 240, 233, 0.20);
+  --color-muted-dark: #9a9c92;
+
+  /* Warm Ivory — Editorial Light Elements */
+  --color-ivory: #f2f0e9;
+  --color-paper: #e7e4db;
+  --color-paper-card: #dedad0;
+  --color-border-light: rgba(17, 18, 16, 0.10);
+  --color-border-light-strong: rgba(17, 18, 16, 0.22);
+  --color-muted-light: #6e7067;
+
+  /* Signal Lime & Accent */
+  --color-lime: #d4ff69;
+  --color-lime-muted: #b8e650;
+  --color-lime-glow: rgba(212, 255, 105, 0.18);
+  --color-focus: #d4ff69;
+
+  /* Semantic UI Tokens */
+  --background: #111210;
+  --foreground: #f2f0e9;
+  --card: #1c1d1a;
+  --card-foreground: #f2f0e9;
+  --popover: #1c1d1a;
+  --popover-foreground: #f2f0e9;
+  --primary: #d4ff69;
+  --primary-foreground: #111210;
+  --secondary: #1f201d;
+  --secondary-foreground: #f2f0e9;
+  --muted: #1c1d1a;
+  --muted-foreground: #9a9c92;
+  --accent: #1f201d;
+  --accent-foreground: #d4ff69;
+  --destructive: #ff5f56;
+  --destructive-foreground: #f2f0e9;
+  --border: rgba(242, 240, 233, 0.10);
+  --input: rgba(242, 240, 233, 0.12);
+  --ring: #d4ff69;
+
+  /* Layout & Geometry */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+  --radius-2xl: 24px;
+  --radius-pill: 9999px;
+
+  /* Shadows for Elevated Surfaces */
+  --shadow-subtle: 0 1px 2px 0 rgba(0, 0, 0, 0.35);
+  --shadow-card: 0 4px 20px -2px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(242, 240, 233, 0.08);
+  --shadow-card-hover: 0 12px 36px -4px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(212, 255, 105, 0.30);
+  --shadow-glow: 0 0 32px -4px rgba(212, 255, 105, 0.25);
+}

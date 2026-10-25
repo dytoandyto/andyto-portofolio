@@ -25,7 +25,7 @@ export function AnimatedHeadline({
   duration = 0.65,
   stagger = 0.045,
   highlightWord,
-  highlightClassName = "text-[#D4FF69] italic font-medium",
+  highlightClassName = "text-[#D4FF69] font-editorial-accent italic font-normal pr-0.5",
 }: SplitTextProps) {
   // Support deliberate line breaks via '\n'
   const lines = text.split("\n");
