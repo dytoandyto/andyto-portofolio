@@ -127,16 +127,6 @@ export function TechMarquee() {
   return (
     <section className="relative py-7 md:py-9 border-y border-[rgba(242,240,233,0.08)] bg-[#0C0D0A]/80 backdrop-blur-md overflow-hidden">
       <Container>
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4 sm:mb-5 px-1">
-          <div className="flex items-center gap-2 font-mono text-[11px] sm:text-xs tracking-wider uppercase text-[#8E9086]">
-            <Code2 className="w-3.5 h-3.5 text-[#D4FF69]" />
-            <span>Verified Production Stack & Engineering Ecosystem</span>
-          </div>
-          <span className="text-[11px] font-mono text-[#8E9086] hidden sm:inline">
-            Original Brand Identities · Continuous Loop
-          </span>
-        </div>
-
         {/* High-Impact Logo Strip with genuine brand colors and smooth edge fades */}
         <div className="relative rounded-2xl bg-[#111210]/60 border border-[rgba(242,240,233,0.07)] py-3.5 sm:py-4.5 shadow-xl overflow-hidden">
           <LogoLoop
@@ -154,6 +144,7 @@ export function TechMarquee() {
             ariaLabel="Verified production technology stack brand logos"
           />
         </div>
+
       </Container>
     </section>
   );

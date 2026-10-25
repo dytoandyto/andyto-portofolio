@@ -115,9 +115,9 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ ...gentleSpring, delay: 0.2 }}
-            className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[380px] sm:min-h-[460px] md:min-h-[520px] lg:min-h-[580px]"
+            className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[440px] sm:min-h-[500px] md:min-h-[560px] lg:min-h-[620px] xl:min-h-[660px]"
           >
-            <div className="w-full h-[380px] sm:h-[460px] md:h-[520px] lg:h-[580px] relative z-10 flex items-center justify-center">
+            <div className="w-full h-[440px] sm:h-[500px] md:h-[560px] lg:h-[620px] xl:h-[660px] relative z-10 flex items-center justify-center">
               <Lanyard
                 frontImage="/card-front.png"
                 backImage="/card-back.png"
@@ -128,16 +128,16 @@ export function HeroSection() {
                 orientation="portrait"
                 finish="glossy"
                 cornerRadius={0.3}
-                size={0.65}
+                size={0.56}
                 anchor="center"
-                strapLength={0.5}
+                strapLength={0.46}
                 strapColor="#111111"
                 strapWidth={0.65}
                 metal="silver"
                 gravity={1}
-                damping={0.5}
-                elasticity={0.5}
-                breeze={0.5}
+                damping={0.55}
+                elasticity={0.45}
+                breeze={0.35}
                 interactive
                 intro
               />

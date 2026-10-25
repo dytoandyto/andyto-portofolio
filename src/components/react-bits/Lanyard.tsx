@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { CSSProperties } from 'react';
 import * as THREE from 'three';
 
@@ -812,13 +812,21 @@ const solvePin = (body: Body, grab: Grab, target: THREE.Vector3) => {
 const placeHanging = (sim: Simulation, layout: CardLayout, intro: boolean) => {
   const { nodes, previous, velocities, body, anchor } = sim;
   nodes[0].copy(anchor);
+  // Refined natural pendulum release angle (~15 degrees) that never swings outside canvas boundaries
+  const introAngle = intro ? 0.26 : 0;
+  const introSin = Math.sin(introAngle);
+  const introCos = Math.cos(introAngle);
   for (let i = 1; i <= JOINTS; i++) {
     nodes[i].copy(nodes[i - 1]);
-    if (intro) nodes[i].x += sim.rest;
-    else nodes[i].y -= sim.rest;
+    nodes[i].x += introSin * sim.rest;
+    nodes[i].y -= introCos * sim.rest;
   }
   body.quaternion.identity();
-  if (intro) body.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), Math.PI / 2);
+  if (intro) {
+    body.quaternion.setFromAxisAngle(new THREE.Vector3(0, 0, 1), introAngle);
+    // Subtle initial 3D perspective angle so badge face reflections catch light immediately
+    body.quaternion.multiply(new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), -0.06));
+  }
   body.hang.set(0, layout.hangY, 0);
   const offset = scratch.a.copy(body.hang).applyQuaternion(body.quaternion);
   body.position.copy(nodes[JOINTS]).sub(offset);
@@ -968,6 +976,7 @@ const Lanyard = ({
   style
 }: LanyardProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [webGlFailed, setWebGlFailed] = useState(false);
   const initialSettings: Settings = {
     frontImage,
     backImage,
@@ -1029,6 +1038,7 @@ const Lanyard = ({
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     } catch {
+      setWebGlFailed(true);
       return undefined;
     }
     renderer.setClearColor(0x000000, 0);
@@ -1180,7 +1190,9 @@ const Lanyard = ({
       const s = settingsRef.current!;
       const aspect = view.width / view.height;
       let viewHeight = layout.height / clamp(s.size, 0.15, 0.9);
-      const minimumWidth = layout.width / 0.72;
+      // Safe framing: allocate at least 25-30% buffer on each side for swings and perspective
+      const safeHorizontalCoverage = aspect < 1 ? Math.min(0.52, 0.46 * Math.max(0.65, aspect)) : 0.50;
+      const minimumWidth = layout.width / safeHorizontalCoverage;
       if (viewHeight * aspect < minimumWidth) viewHeight = minimumWidth / aspect;
       const viewWidth = viewHeight * aspect;
       camera.aspect = aspect;
@@ -1511,10 +1523,13 @@ const Lanyard = ({
     canvas.addEventListener('touchstart', onTouchStart, { passive: false });
 
     const resize = () => {
-      view.width = Math.max(1, container.clientWidth);
-      view.height = Math.max(1, container.clientHeight);
+      const w = container.clientWidth || container.offsetWidth;
+      const h = container.clientHeight || container.offsetHeight;
+      if (w < 10 || h < 10) return;
+      view.width = w;
+      view.height = h;
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
-      renderer.setSize(view.width, view.height, false);
+      renderer.setSize(w, h, false);
       apply();
       render();
     };
@@ -1533,6 +1548,7 @@ const Lanyard = ({
 
     applyRef.current = apply;
     resize();
+    start();
 
     return () => {
       alive = false;
@@ -1555,6 +1571,43 @@ const Lanyard = ({
       if (canvas.parentNode) canvas.parentNode.removeChild(canvas);
     };
   }, []);
+
+  if (webGlFailed) {
+    return (
+      <div className={`relative w-full h-full flex flex-col items-center justify-center p-4 ${className}`.trim()} style={style}>
+        <div className="w-8 h-16 border-x-2 border-dashed border-[#252A22] bg-[#111210] flex items-center justify-center -mb-2 z-0">
+          <div className="w-3.5 h-3.5 rounded-full border-2 border-[#8E9086]" />
+        </div>
+        <div className="relative w-60 sm:w-64 aspect-[512/768] rounded-2xl bg-[#0C0D0A] border border-[#252A22] p-4 shadow-2xl flex flex-col justify-between z-10">
+          <div className="flex items-center justify-between border-b border-[#252A22] pb-2 text-[10px] font-mono text-[#8E9086]">
+            <span>ANDYTO .STUDIO</span>
+            <span className="text-[#D4FF69]">PASS: AD-0824</span>
+          </div>
+          <div className="flex gap-3 items-center py-2">
+            <div className="w-16 h-20 rounded-lg overflow-hidden border border-[#252A22] bg-[#111210] flex-shrink-0">
+              <img
+                src={portraitImage || frontImage || '/images/profile/andyto-portrait.webp'}
+                alt="Portrait"
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  (e.target as HTMLElement).style.display = 'none';
+                }}
+              />
+            </div>
+            <div className="font-mono text-left">
+              <div className="text-xs font-bold text-[#F2F0E9]">ANDYTO</div>
+              <div className="text-[10px] text-[#D4FF69]">SOFTWARE ENGINEER</div>
+              <div className="text-[9px] text-[#8E9086] mt-1">ID: 2026-ENG // VERIFIED</div>
+            </div>
+          </div>
+          <div className="border-t border-[#252A22] pt-2 text-[9px] font-mono text-[#8E9086]">
+            <div>REACT 19 · NEXT.JS · TYPESCRIPT</div>
+            <div>TAILWIND CSS · THREE.JS</div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div ref={containerRef} className={`relative w-full h-full overflow-hidden ${className}`.trim()} style={style} />
