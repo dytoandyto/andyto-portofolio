@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { AnimatedHeadline } from "@/components/react-bits/AnimatedHeadline";
+import ShapeGrid from "@/components/react-bits/ShapeGrid";
 import Lanyard from "./Lanyard";
 import { motion } from "motion/react";
 import { ArrowDown } from "lucide-react";
@@ -17,8 +18,38 @@ import {
 
 export function HeroSection() {
   return (
-    <section id="hero" className="relative pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden flex flex-col justify-center">
-      <Container>
+    <section
+      id="hero"
+      className="relative pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden flex flex-col justify-center bg-[#0C0D0A]"
+    >
+      {/* 1. Base Decorative Layer: React Bits ShapeGrid background */}
+      <div
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <ShapeGrid
+          shape="square"
+          direction="diagonal"
+          lineColor="#252A22"
+          hoverColor="#D4FF69"
+          hoverFillColor="#D4FF69"
+          fillOpacity={0.08}
+          cellSize={52}
+          speed={0.15}
+          glow={0.18}
+          twinkle={0}
+          fade={0.8}
+          clickCascade={false}
+          intro={true}
+          opacity={0.7}
+          backgroundColor="transparent"
+        />
+        {/* Subtle dark gradient overlay to preserve text contrast and edge transitions */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0C0D0A]/95 via-[#0C0D0A]/50 to-transparent pointer-events-none hidden lg:block" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0C0D0A]/85 via-transparent to-[#0C0D0A] pointer-events-none" />
+      </div>
+
+      <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
           {/* Left Column (or Mobile Stack Top): Personal positioning & Split Text headline */}
           <motion.div
@@ -79,63 +110,36 @@ export function HeroSection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column (or Mobile Stack Below): React Bits 3D Interactive Lanyard */}
+          {/* Right Column (or Mobile Stack Below): React Bits 3D Interactive Lanyard suspended against background */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ ...gentleSpring, delay: 0.2 }}
-            className="lg:col-span-6 relative flex items-center justify-center w-full"
+            className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[380px] sm:min-h-[460px] md:min-h-[520px] lg:min-h-[580px]"
           >
-            <div className="w-full max-w-sm sm:max-w-md lg:max-w-lg mx-auto relative rounded-3xl bg-gradient-to-b from-[#181916]/80 to-[#111210]/95 border border-[rgba(242,240,233,0.10)] p-1 sm:p-2 shadow-2xl backdrop-blur-sm overflow-hidden group">
-              {/* Sensible Fallback Card Layer positioned underneath 3D canvas */}
-              <div
-                className="absolute inset-0 flex items-center justify-center p-6 pointer-events-none"
-                aria-hidden="true"
-              >
-                <div className="w-[200px] h-[300px] sm:w-[230px] sm:h-[340px] rounded-2xl bg-[#141512] border border-[rgba(242,240,233,0.14)] shadow-2xl p-6 flex flex-col justify-between items-center text-center opacity-70 group-hover:opacity-90 transition-opacity">
-                  <div className="w-10 h-2.5 rounded-full bg-[rgba(242,240,233,0.15)] border border-[rgba(242,240,233,0.2)] mb-1" />
-                  <div className="space-y-2">
-                    <div className="w-12 h-12 mx-auto rounded-xl bg-[#D4FF69]/10 border border-[#D4FF69]/30 flex items-center justify-center text-[#D4FF69] font-mono text-xl font-bold">
-                      A
-                    </div>
-                    <p className="font-display font-semibold text-[#F2F0E9] text-base">
-                      {siteConfig.name}
-                    </p>
-                    <p className="font-mono text-[11px] text-[#D4FF69]">
-                      {siteConfig.role}
-                    </p>
-                  </div>
-                  <div className="w-full pt-3 border-t border-[rgba(242,240,233,0.08)] font-mono text-[10px] text-[#8E9086] flex justify-between">
-                    <span>ID: 2026-ENG</span>
-                    <span className="text-[#D4FF69]">VERIFIED</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="w-full h-[360px] sm:h-[440px] md:h-[500px] lg:h-[560px] relative z-10">
-                <Lanyard
-                  frontImage="/card-front.png"
-                  backImage="/card-back.png"
-                  strapImage="/band.png"
-                  imageFit="cover"
-                  cardColor="#ffffff"
-                  orientation="portrait"
-                  finish="glossy"
-                  cornerRadius={0.3}
-                  size={0.6}
-                  anchor="center"
-                  strapLength={0.5}
-                  strapColor="#111111"
-                  strapWidth={0.65}
-                  metal="silver"
-                  gravity={1}
-                  damping={0.5}
-                  elasticity={0.5}
-                  breeze={0.5}
-                  interactive
-                  intro
-                />
-              </div>
+            <div className="w-full h-[380px] sm:h-[460px] md:h-[520px] lg:h-[580px] relative z-10 flex items-center justify-center">
+              <Lanyard
+                frontImage="/card-front.png"
+                backImage="/card-back.png"
+                strapImage="/band.png"
+                imageFit="cover"
+                cardColor="#ffffff"
+                orientation="portrait"
+                finish="glossy"
+                cornerRadius={0.3}
+                size={0.65}
+                anchor="center"
+                strapLength={0.5}
+                strapColor="#111111"
+                strapWidth={0.65}
+                metal="silver"
+                gravity={1}
+                damping={0.5}
+                elasticity={0.5}
+                breeze={0.5}
+                interactive
+                intro
+              />
             </div>
           </motion.div>
         </div>
@@ -148,16 +152,13 @@ export function HeroSection() {
           className="mt-10 sm:mt-14 flex items-center justify-between text-xs font-mono text-[#8E9086] pt-5 border-t border-[rgba(242,240,233,0.06)]"
         >
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#D4FF69] animate-pulse" />
-            <span>Interactive 3D Badge Experience</span>
+            <span className="w-2 h-2 rounded-full bg-[#D4FF69] animate-pulse" />
+            <span>Available for Select Projects & Engineering Roles</span>
           </div>
-          <a
-            href="#profile"
-            className="flex items-center gap-1.5 hover:text-[#F2F0E9] transition-colors cursor-pointer group"
-          >
-            <span>01 / Profile</span>
-            <ArrowDown className="w-3.5 h-3.5 transition-transform group-hover:translate-y-1" />
-          </a>
+          <div className="hidden sm:flex items-center gap-1.5 text-[#6B6D63]">
+            <span>Scroll to explore</span>
+            <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
+          </div>
         </motion.div>
       </Container>
     </section>
