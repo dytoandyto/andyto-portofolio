@@ -35,7 +35,7 @@ export function HeroSection() {
           hoverFillColor="#D4FF69"
           fillOpacity={0.08}
           cellSize={52}
-          speed={0.15}
+          speed={0.6}
           glow={0.18}
           twinkle={0}
           fade={0.8}
@@ -112,7 +112,7 @@ export function HeroSection() {
 
           {/* Right Column (or Mobile Stack Below): React Bits 3D Interactive Lanyard suspended against background */}
           <motion.div
-            initial={false}
+            initial={{ opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ ...gentleSpring, delay: 0.2 }}
             className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[380px] sm:min-h-[460px] md:min-h-[520px] lg:min-h-[580px]"
