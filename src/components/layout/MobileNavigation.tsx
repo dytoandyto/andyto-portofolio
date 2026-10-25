@@ -15,10 +15,14 @@ interface MobileNavigationProps {
 export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
   const pathname = usePathname();
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const prevPathnameRef = useRef(pathname);
 
-  // Close on route change
+  // Close only on genuine route change
   useEffect(() => {
-    onClose();
+    if (prevPathnameRef.current !== pathname) {
+      prevPathnameRef.current = pathname;
+      onClose();
+    }
   }, [pathname, onClose]);
 
   // Handle escape key & focus management

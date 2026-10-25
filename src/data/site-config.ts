@@ -72,6 +72,7 @@ export const siteConfig: SiteConfig = {
     locale: "en_US",
   },
   navItems: [
+    { label: "Home", href: "/" },
     { label: "Work", href: "/work" },
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },

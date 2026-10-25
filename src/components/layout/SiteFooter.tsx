@@ -48,14 +48,6 @@ export function SiteFooter() {
               Navigation
             </span>
             <ul className="space-y-2.5 text-sm font-body">
-              <motion.li whileHover={{ x: 3 }} transition={snappySpring}>
-                <Link
-                  href="/"
-                  className="text-[#8E9086] hover:text-[#F2F0E9] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B6DB61]"
-                >
-                  Index / Home
-                </Link>
-              </motion.li>
               {siteConfig.navItems.map((item) => (
                 <motion.li
                   key={item.href}
