@@ -1,6 +1,12 @@
 export interface SiteConfig {
   name: string;
   role: string;
+  identity: {
+    name: string;
+    role: string;
+    portrait: string;
+  };
+  portrait?: string;
   disciplines: string[];
   tagline: string;
   statement: string;
@@ -32,6 +38,12 @@ export interface SiteConfig {
 export const siteConfig: SiteConfig = {
   name: "Andyto",
   role: "Product-minded Software Engineer",
+  identity: {
+    name: "Andyto",
+    role: "Product-minded Software Engineer",
+    portrait: "/images/profile/andyto-portrait.webp",
+  },
+  portrait: "/images/profile/andyto-portrait.webp",
   disciplines: [
     "Frontend Engineering",
     "UI/UX Implementation",

@@ -21,6 +21,7 @@ interface PathLike {
 export interface LanyardProps {
   frontImage?: string;
   backImage?: string;
+  portraitImage?: string;
   imageFit?: ImageFit;
   cardColor?: string;
   orientation?: Orientation;
@@ -46,6 +47,7 @@ export interface LanyardProps {
 interface Settings {
   frontImage?: string;
   backImage?: string;
+  portraitImage?: string;
   imageFit: ImageFit;
   cardColor: string;
   orientation: Orientation;
@@ -70,6 +72,7 @@ interface Images {
   front: HTMLImageElement | null;
   back: HTMLImageElement | null;
   strap: HTMLImageElement | null;
+  portrait: HTMLImageElement | null;
 }
 
 interface CardLayout {
@@ -589,12 +592,84 @@ const drawFitted = (
   ctx.drawImage(image, (width - w) / 2, (height - h) / 2, w, h);
 };
 
-const paintFace = (canvas: HTMLCanvasElement, image: HTMLImageElement | null, color: Rgb, fit: ImageFit) => {
+const paintFace = (
+  canvas: HTMLCanvasElement,
+  image: HTMLImageElement | null,
+  color: Rgb,
+  fit: ImageFit,
+  portrait?: HTMLImageElement | null
+) => {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
   ctx.fillStyle = toCss(color);
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  if (image) drawFitted(ctx, image, canvas.width, canvas.height, fit);
+  if (image) {
+    drawFitted(ctx, image, canvas.width, canvas.height, fit);
+
+    // If portrait image is supplied and successfully loaded, composite into front badge photo slot
+    if (portrait) {
+      const scale = (fit === 'contain' ? Math.min : Math.max)(
+        canvas.width / image.width,
+        canvas.height / image.height
+      );
+      const fw = image.width * scale;
+      const fh = image.height * scale;
+      const ox = (canvas.width - fw) / 2;
+      const oy = (canvas.height - fh) / 2;
+
+      // Badge layout coordinates in 512x768 badge space:
+      // Photo frame: x=48, y=195, width=120, height=150 (4:5 portrait ratio)
+      const px = ox + 48 * scale;
+      const py = oy + 195 * scale;
+      const pw = 120 * scale;
+      const ph = 150 * scale;
+      const radius = 8 * scale;
+
+      // 1. Clip photo to rounded rectangle frame
+      ctx.save();
+      ctx.beginPath();
+      traceRoundedRect(ctx, px, py, pw, ph, radius);
+      ctx.clip();
+
+      // 2. Object-fit: cover with upper-third vertical bias to keep face visible
+      const srcW = portrait.width;
+      const srcH = portrait.height;
+      const srcAspect = srcW / srcH;
+      const targetAspect = pw / ph;
+
+      let sx = 0;
+      let sy = 0;
+      let sw = srcW;
+      let sh = srcH;
+
+      if (srcAspect > targetAspect) {
+        sw = srcH * targetAspect;
+        sx = (srcW - sw) / 2;
+      } else {
+        sh = srcW / targetAspect;
+        const excessH = srcH - sh;
+        sy = Math.max(0, Math.min(excessH, excessH * 0.22));
+      }
+
+      ctx.drawImage(portrait, sx, sy, sw, sh, px, py, pw, ph);
+      ctx.restore();
+
+      // 3. Crisp frame border & Crafted Digital signal lime accent line
+      ctx.save();
+      ctx.beginPath();
+      traceRoundedRect(ctx, px, py, pw, ph, radius);
+      ctx.lineWidth = Math.max(1, 1.5 * scale);
+      ctx.strokeStyle = '#252A22';
+      ctx.stroke();
+
+      ctx.beginPath();
+      traceRoundedRect(ctx, px + 1.5, py + 1.5, pw - 3, ph - 3, Math.max(0, radius - 1.5));
+      ctx.lineWidth = Math.max(1, 0.8 * scale);
+      ctx.strokeStyle = 'rgba(212, 255, 105, 0.45)';
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
 };
 
 const paintStrap = (canvas: HTMLCanvasElement, image: HTMLImageElement | null, color: Rgb) => {
@@ -870,6 +945,7 @@ const stepSimulation = (sim: Simulation, dt: number, physics: Physics, time: num
 const Lanyard = ({
   frontImage,
   backImage,
+  portraitImage,
   imageFit = 'cover',
   cardColor = '#ffffff',
   orientation = 'portrait',
@@ -895,6 +971,7 @@ const Lanyard = ({
   const initialSettings: Settings = {
     frontImage,
     backImage,
+    portraitImage,
     imageFit: imageFit === 'contain' ? 'contain' : 'cover',
     cardColor,
     orientation: orientation === 'landscape' ? 'landscape' : 'portrait',
@@ -921,6 +998,7 @@ const Lanyard = ({
     settingsRef.current = {
       frontImage,
       backImage,
+      portraitImage,
       imageFit: imageFit === 'contain' ? 'contain' : 'cover',
       cardColor,
       orientation: orientation === 'landscape' ? 'landscape' : 'portrait',
@@ -974,7 +1052,7 @@ const Lanyard = ({
     scene.add(keyLight, fillLight);
 
     const imageCache = new Map<string, Promise<HTMLImageElement | null>>();
-    const images: Images = { front: null, back: null, strap: null };
+    const images: Images = { front: null, back: null, strap: null, portrait: null };
     const frontCanvas = document.createElement('canvas');
     const backCanvas = document.createElement('canvas');
     const strapCanvas = document.createElement('canvas');
@@ -1082,7 +1160,7 @@ const Lanyard = ({
         frontTexture.dispose();
         backTexture.dispose();
       }
-      paintFace(frontCanvas, images.front, color, s.imageFit);
+      paintFace(frontCanvas, images.front, color, s.imageFit, images.portrait);
       paintFace(backCanvas, images.back || images.front, color, s.imageFit);
       frontTexture.needsUpdate = true;
       backTexture.needsUpdate = true;
@@ -1152,23 +1230,25 @@ const Lanyard = ({
         }
       }
 
-      const imageKey = `${s.frontImage}|${s.backImage}|${s.strapImage}`;
+      const imageKey = `${s.frontImage}|${s.backImage}|${s.strapImage}|${s.portraitImage}`;
       if (imageKey !== applied.imageKey) {
         const token = ++imageToken;
         Promise.all([
           loadImage(imageCache, s.frontImage),
           loadImage(imageCache, s.backImage),
-          loadImage(imageCache, s.strapImage)
-        ]).then(([front, back, strap]) => {
+          loadImage(imageCache, s.strapImage),
+          loadImage(imageCache, s.portraitImage)
+        ]).then(([front, back, strap, portrait]) => {
           if (!alive || token !== imageToken) return;
           images.front = front;
           images.back = back;
           images.strap = strap;
+          images.portrait = portrait;
           paintFaces();
           repaintStrap();
         });
       }
-      const faceKey = `${layoutKey}|${s.cardColor}|${s.imageFit}`;
+      const faceKey = `${layoutKey}|${s.cardColor}|${s.imageFit}|${s.portraitImage}`;
       if (faceKey !== applied.faceKey) paintFaces();
       if (s.strapColor !== applied.strapColor) repaintStrap();
 

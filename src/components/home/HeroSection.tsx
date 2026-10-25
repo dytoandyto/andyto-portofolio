@@ -54,7 +54,7 @@ export function HeroSection() {
           {/* Left Column (or Mobile Stack Top): Personal positioning & Split Text headline */}
           <motion.div
             variants={containerStaggerVariants}
-            initial="hidden"
+            initial={false}
             animate="visible"
             className="lg:col-span-6 space-y-6 sm:space-y-7"
           >
@@ -112,7 +112,7 @@ export function HeroSection() {
 
           {/* Right Column (or Mobile Stack Below): React Bits 3D Interactive Lanyard suspended against background */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.94, y: 24 }}
+            initial={false}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ ...gentleSpring, delay: 0.2 }}
             className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[380px] sm:min-h-[460px] md:min-h-[520px] lg:min-h-[580px]"
@@ -121,6 +121,7 @@ export function HeroSection() {
               <Lanyard
                 frontImage="/card-front.png"
                 backImage="/card-back.png"
+                portraitImage={siteConfig.identity?.portrait || siteConfig.portrait}
                 strapImage="/band.png"
                 imageFit="cover"
                 cardColor="#ffffff"
@@ -151,14 +152,6 @@ export function HeroSection() {
           transition={{ delay: 0.8, duration: 0.5 }}
           className="mt-10 sm:mt-14 flex items-center justify-between text-xs font-mono text-[#8E9086] pt-5 border-t border-[rgba(242,240,233,0.06)]"
         >
-          <div className="flex items-center gap-2">
-            <span className="w-2 h-2 rounded-full bg-[#D4FF69] animate-pulse" />
-            <span>Available for Select Projects & Engineering Roles</span>
-          </div>
-          <div className="hidden sm:flex items-center gap-1.5 text-[#6B6D63]">
-            <span>Scroll to explore</span>
-            <ArrowDown className="w-3.5 h-3.5 animate-bounce" />
-          </div>
         </motion.div>
       </Container>
     </section>

@@ -158,22 +158,39 @@ const frontPng = createPng(512, 768, (x, y, w, h) => {
   // Horizontal divider
   if (y === 170 && x >= 40 && x <= w - 40) return [242, 240, 233, 50];
 
-  // Chip Icon representation
-  if (x >= 48 && x <= 140 && y >= 200 && y <= 270) {
-    const isChipBorder = x === 48 || x === 140 || y === 200 || y === 270;
-    if (isChipBorder) return [212, 255, 105, 200];
-    if ((x === 94) || (y === 235)) return [212, 255, 105, 120];
-    return [30, 32, 28, 255];
+  // Photo Frame Area (120 x 150, 4:5 portrait ratio)
+  if (x >= 48 && x <= 168 && y >= 195 && y <= 345) {
+    const isPhotoBorder = (x === 48 || x === 168 || y === 195 || y === 345);
+    const isLimeCorner = ((x <= 58 || x >= 158) && (y <= 205 || y >= 335)) && isPhotoBorder;
+    if (isLimeCorner) return [212, 255, 105, 255];
+    if (isPhotoBorder) return [37, 42, 34, 255];
+
+    // Centered Fallback Monogram (4-pane geometric mark)
+    // Top-left pane (signal lime)
+    if (x >= 88 && x <= 105 && y >= 238 && y <= 255) return [212, 255, 105, 240];
+    // Top-right pane (warm ivory)
+    if (x >= 111 && x <= 128 && y >= 238 && y <= 255) return [242, 240, 233, 200];
+    // Bottom-left pane (warm ivory)
+    if (x >= 88 && x <= 105 && y >= 261 && y <= 278) return [242, 240, 233, 200];
+    // Bottom-right pane (signal lime)
+    if (x >= 111 && x <= 128 && y >= 261 && y <= 278) return [212, 255, 105, 240];
+
+    // Subtle label below monogram
+    if (textPixel("PORTRAIT ID", x, y, 74, 305, 1)) return [142, 144, 134, 200];
+
+    return [14, 15, 12, 255];
   }
 
-  // Profile Title & Role
-  if (textPixel("ANDYTO", x, y, 170, 210, 4)) return [242, 240, 233, 255];
-  if (textPixel("SOFTWARE ENGINEER", x, y, 170, 246, 2)) return [212, 255, 105, 255];
+  // Profile Title & Role (positioned right of photo frame)
+  if (textPixel("ANDYTO", x, y, 186, 202, 4)) return [242, 240, 233, 255];
+  if (textPixel("SOFTWARE ENGINEER", x, y, 186, 240, 2)) return [212, 255, 105, 255];
+  if (textPixel("ID: 2026-ENG // VERIFIED", x, y, 186, 268, 1)) return [142, 144, 134, 255];
+  if (textPixel("STATUS: AVAILABLE FOR SELECT ROLES", x, y, 186, 288, 1)) return [114, 229, 138, 255];
+  if (textPixel("LOCATION: INDONESIA - REMOTE", x, y, 186, 308, 1)) return [142, 144, 134, 200];
+  if (textPixel("DISCIPLINE: FRONTEND - UI/UX", x, y, 186, 328, 1)) return [142, 144, 134, 200];
 
-  // Body Narrative
-  if (textPixel("DISCIPLINE: FRONTEND / UI/UX / FULL-STACK", x, y, 48, 310, 1)) return [242, 240, 233, 220];
-  if (textPixel("STATUS: AVAILABLE FOR SELECT CONTRACTS", x, y, 48, 330, 1)) return [114, 229, 138, 255];
-  if (textPixel("LOCATION: INDONESIA - REMOTE WORLDWIDE", x, y, 48, 350, 1)) return [142, 144, 134, 200];
+  // Section divider below profile
+  if (y === 365 && x >= 40 && x <= w - 40) return [242, 240, 233, 40];
 
   // Core Strengths Box
   if (x >= 48 && x <= w - 48 && y >= 390 && y <= 540) {
