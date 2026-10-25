@@ -1,0 +1,16 @@
+export { ReactLogo } from "./ReactLogo";
+export { NextjsLogo } from "./NextjsLogo";
+export { TypescriptLogo } from "./TypescriptLogo";
+export { JavascriptLogo } from "./JavascriptLogo";
+export { TailwindcssLogo } from "./TailwindcssLogo";
+export { ViteLogo } from "./ViteLogo";
+export { PostgresqlLogo } from "./PostgresqlLogo";
+export { PrismaLogo } from "./PrismaLogo";
+export { LaravelLogo } from "./LaravelLogo";
+export { PhpLogo } from "./PhpLogo";
+export { DockerLogo } from "./DockerLogo";
+export { NodejsLogo } from "./NodejsLogo";
+export { FigmaLogo } from "./FigmaLogo";
+export { GitLogo } from "./GitLogo";
+export { GithubLogo } from "./GithubLogo";
+export { AstroLogo } from "./AstroLogo";
