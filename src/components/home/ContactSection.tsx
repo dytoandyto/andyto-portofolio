@@ -5,6 +5,7 @@ import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
+import Particles from "@/components/react-bits/Particles";
 import { Copy, Check, ArrowUpRight, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import {
@@ -26,11 +27,30 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-28 md:py-40 bg-[#111210] relative overflow-hidden editorial-grain">
-      {/* Decorative ambient subtle glow */}
+      {/* 1. Base Decorative Layer: React Bits Particles for atmospheric beacon closing */}
       <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-[#D4FF69]/5 blur-[120px] pointer-events-none"
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
-      />
+      >
+        <Particles
+          particleCount={70}
+          particleSpread={10}
+          speed={0.06}
+          particleColors={["#D4FF69", "#F2F0E9", "#8E9086"]}
+          particleBaseSize={32}
+          glow={0.3}
+          twinkle={0.4}
+          drift="up"
+          driftSpeed={0.35}
+          connections={false}
+          connectionDistance={80}
+          opacity={0.45}
+          clickBurst={true}
+          intro={false}
+        />
+        {/* Soft edge fades for seamless connection with footer */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#111210] via-[#111210]/0 to-[#0D0E0C] pointer-events-none" />
+      </div>
 
       <Container>
         <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">

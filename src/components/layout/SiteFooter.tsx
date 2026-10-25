@@ -5,6 +5,7 @@ import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
+import Particles from "@/components/react-bits/Particles";
 import { motion } from "motion/react";
 import {
   containerStaggerVariants,
@@ -16,8 +17,32 @@ export function SiteFooter() {
   const currentYear = 2026;
 
   return (
-    <footer className="w-full bg-[#0D0E0C] text-[#F2F0E9] border-t border-[rgba(242,240,233,0.08)] py-16 md:py-24 overflow-hidden">
-      <Container>
+    <footer className="relative w-full bg-[#0D0E0C] text-[#F2F0E9] border-t border-[rgba(242,240,233,0.08)] py-16 md:py-24 overflow-hidden">
+      {/* Restrained continuation of Contact constellation dust */}
+      <div
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <Particles
+          particleCount={32}
+          particleSpread={12}
+          speed={0.03}
+          particleColors={["#D4FF69", "#8E9086"]}
+          particleBaseSize={28}
+          glow={0.2}
+          twinkle={0.2}
+          drift="up"
+          driftSpeed={0.2}
+          connections={false}
+          opacity={0.2}
+          clickBurst={false}
+          moveParticlesOnHover={false}
+          intro={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0E0C] via-[#0D0E0C]/80 to-[#0D0E0C] pointer-events-none" />
+      </div>
+
+      <Container className="relative z-10">
         <motion.div
           initial="hidden"
           whileInView="visible"

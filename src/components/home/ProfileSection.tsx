@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { ScrollRevealText } from "@/components/react-bits/ScrollRevealText";
+import DarkVeil from "@/components/react-bits/DarkVeil";
 import { siteConfig } from "@/data/site-config";
 import { motion } from "motion/react";
 import {
@@ -24,9 +25,31 @@ export function ProfileSection() {
   return (
     <section
       id="profile"
-      className="py-20 md:py-32 bg-[#141512]/90 border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
+      className="py-20 md:py-32 bg-[#141512] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
     >
-      <Container>
+      {/* 1. Base Decorative Layer: React Bits DarkVeil for atmospheric editorial depth */}
+      <div
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <DarkVeil
+          color="#1A2818"
+          speed={0.25}
+          scale={1.25}
+          flow={0.6}
+          warp={0.12}
+          brightness={0.65}
+          glow={0.2}
+          grain={0.04}
+          opacity={0.32}
+          fade={0.75}
+          mouseInteraction={true}
+        />
+        {/* Subtle dark gradient overlay to preserve reading focus on editorial copy */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#141512] via-[#141512]/60 to-[#141512] pointer-events-none" />
+      </div>
+
+      <Container className="relative z-10">
         {/* Section Eyebrow & Main Title with Viewport Reveal */}
         <div className="max-w-3xl space-y-4 mb-14 sm:mb-16">
           <div>

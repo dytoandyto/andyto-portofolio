@@ -4,6 +4,7 @@ import React from "react";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { InteractiveSkillCard } from "@/components/react-bits/InteractiveSkillCard";
+import RippleGrid from "@/components/react-bits/RippleGrid";
 import { motion } from "motion/react";
 import { snappySpring } from "@/components/motion/motion-variants";
 import {
@@ -87,7 +88,35 @@ export function SkillsSection() {
       id="capabilities"
       className="py-20 md:py-32 bg-[#111210] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
     >
-      <Container>
+      {/* 1. Base Decorative Layer: React Bits RippleGrid for structured technical atmosphere */}
+      <div
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <RippleGrid
+          color="#252A22"
+          variant="lines"
+          cellSize={46}
+          lineWidth={0.8}
+          glow={0.35}
+          rippleStrength={0.5}
+          rippleSpeed={0.8}
+          rippleSize={1.1}
+          autoRipple="random"
+          rippleInterval={3.8}
+          tilt={32}
+          rotation={-12}
+          opacity={0.45}
+          fade={0.75}
+          mouseInteraction={true}
+          clickRipple={true}
+          intro={false}
+        />
+        {/* Soft edge gradients so Spotlight cards remain the high-contrast priority */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#111210] via-transparent to-[#111210] pointer-events-none" />
+      </div>
+
+      <Container className="relative z-10">
         {/* Section Heading with Viewport Reveal */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}

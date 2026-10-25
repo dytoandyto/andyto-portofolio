@@ -2,6 +2,7 @@
 
 import React from "react";
 import LogoLoop, { LogoItem } from "@/components/react-bits/LogoLoop";
+import DotGrid from "@/components/react-bits/DotGrid";
 import { Container } from "@/components/ui/Container";
 import { Code2 } from "lucide-react";
 
@@ -125,10 +126,28 @@ export function TechMarquee() {
   ];
 
   return (
-    <section className="relative py-7 md:py-9 border-y border-[rgba(242,240,233,0.08)] bg-[#0C0D0A]/80 backdrop-blur-md overflow-hidden">
-      <Container>
+    <section className="relative py-7 md:py-9 border-y border-[rgba(242,240,233,0.08)] bg-[#0C0D0A]/90 backdrop-blur-md overflow-hidden">
+      {/* React Bits DotGrid Background: Restrained tactile dot matrix for technical continuity */}
+      <div
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <DotGrid
+          dotSize={2}
+          gap={22}
+          baseColor="#1F241C"
+          activeColor="#D4FF69"
+          opacity={0.35}
+          fade={0.6}
+          mouseInteraction={false}
+          clickShock={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#0C0D0A] via-transparent to-[#0C0D0A] pointer-events-none" />
+      </div>
+
+      <Container className="relative z-10">
         {/* High-Impact Logo Strip with genuine brand colors and smooth edge fades */}
-        <div className="relative rounded-2xl bg-[#111210]/60 border border-[rgba(242,240,233,0.07)] py-3.5 sm:py-4.5 shadow-xl overflow-hidden">
+        <div className="relative rounded-2xl bg-[#111210]/70 border border-[rgba(242,240,233,0.07)] py-3.5 sm:py-4.5 shadow-xl overflow-hidden">
           <LogoLoop
             logos={verifiedTechLogos}
             speed={28}

@@ -5,7 +5,6 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import { SmoothScroll } from "@/components/layout/SmoothScroll";
-import { Aurora } from "@/components/react-bits/Aurora";
 import "./globals.css";
 
 // 1. Primary Typography: Manrope (Headings, Body, Interface, Navigation, Buttons)
@@ -88,9 +87,6 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-[#111210] text-[#F2F0E9] selection:bg-[#D4FF69] selection:text-[#111210] relative">
         <SmoothScroll>
-          {/* Atmospheric React Bits Aurora background */}
-          <Aurora className="fixed inset-0 z-0 pointer-events-none" opacity={0.32} />
-          
           <ScrollProgress />
           <SiteHeader />
           <main id="main-content" className="flex-1 w-full font-sans relative z-10">

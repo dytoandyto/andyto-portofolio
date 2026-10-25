@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ProjectMockup } from "@/components/projects/ProjectMockup";
 import { InteractiveProjectCard } from "@/components/react-bits/InteractiveProjectCard";
+import { Aurora } from "@/components/react-bits/Aurora";
 import { motion } from "motion/react";
 import { snappySpring } from "@/components/motion/motion-variants";
 import { ArrowUpRight } from "lucide-react";
@@ -19,9 +20,25 @@ export function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-20 md:py-32 bg-[#141512]/95 border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
+      className="py-20 md:py-32 bg-[#141512] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
     >
-      <Container>
+      {/* 1. Base Decorative Layer: React Bits Aurora for soft ambient depth around project showcases */}
+      <div
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+        aria-hidden="true"
+      >
+        <Aurora
+          colorStops={["#111210", "#182416", "#253822", "#D4FF69"]}
+          amplitude={0.9}
+          speed={0.4}
+          blend={0.65}
+          opacity={0.22}
+        />
+        {/* Subtle dark gradient overlay to frame project cards cleanly */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#141512] via-transparent to-[#141512] pointer-events-none" />
+      </div>
+
+      <Container className="relative z-10">
         {/* Section Heading */}
         <motion.div
           initial={{ opacity: 0, y: 16 }}
