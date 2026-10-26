@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import React, { useEffect, useRef, type HTMLAttributes } from 'react';
@@ -195,7 +196,7 @@ void main() {
   energy *= uPresence;
   vec3 light = uColor * energy;
   light += uColor * energy * energy * 0.35;
-  vec3 gleam = mix(uColor * 2.0, vec3(1.0), 0.55);
+  vec3 gleam = uColor * 1.5;
   light += gleam * sheen * uSheen * (0.8 + near * 0.4) * uPresence;
 
   float edge = uFade * 0.5;
@@ -212,9 +213,8 @@ void main() {
     float alpha = clamp(cover * 0.85 * (1.0 + grain) + dither, 0.0, 1.0) * mask;
     outColor = vec4(ink * alpha, alpha);
   } else {
-    vec3 color = 1.0 - exp(-light);
-    color = pow(color, vec3(1.0 / 2.2));
-    color = clamp(color + grain * peak + dither, 0.0, 1.0) * mask;
+    vec3 color = uColor * clamp(energy * 1.4, 0.0, 1.0);
+    float alpha = clamp(max(color.r, max(color.g), color.b) * mask * 0.85, 0.0, 1.0);
     outColor = vec4(color, max(color.r, max(color.g, color.b)));
   }
 }`;

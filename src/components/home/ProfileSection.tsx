@@ -5,12 +5,13 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { ScrollRevealText } from "@/components/react-bits/ScrollRevealText";
-import DarkVeil from "@/components/react-bits/DarkVeil";
+import Threads from "@/components/react-bits/Threads";
 import { siteConfig } from "@/data/site-config";
 import { motion } from "motion/react";
 import {
   containerStaggerVariants,
   fadeInUpVariants,
+  editorialTransition,
 } from "@/components/motion/motion-variants";
 import { MapPin, Code2, Sparkles, CheckCircle2 } from "lucide-react";
 
@@ -27,23 +28,25 @@ export function ProfileSection() {
       id="profile"
       className="py-20 md:py-32 bg-[#141512] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
     >
-      {/* 1. Base Decorative Layer: React Bits DarkVeil for atmospheric editorial depth */}
+      {/* 1. Base Decorative Layer: React Bits Threads for flowing craft and human engineering depth */}
       <div
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
-        <DarkVeil
-          color="#1A2818"
-          speed={0.25}
-          scale={1.25}
-          flow={0.6}
-          warp={0.12}
-          brightness={0.65}
-          glow={0.2}
-          grain={0.04}
-          opacity={0.32}
-          fade={0.75}
-          mouseInteraction={true}
+        <Threads
+          color="#303A27"
+          accentColor="#D4FF69"
+          amplitude={1.2}
+          distance={0.35}
+          enableMouseInteraction={true}
+          lineCount={65}
+          thickness={0.6}
+          softness={1.2}
+          speed={0.35}
+          waves={1.2}
+          brightness={1.1}
+          fade={0.4}
+          opacity={0.45}
         />
         {/* Subtle dark gradient overlay to preserve reading focus on editorial copy */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#141512] via-[#141512]/60 to-[#141512] pointer-events-none" />
@@ -51,7 +54,13 @@ export function ProfileSection() {
 
       <Container className="relative z-10">
         {/* Section Eyebrow & Main Title with Viewport Reveal */}
-        <div className="max-w-3xl space-y-4 mb-14 sm:mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.15 }}
+          transition={editorialTransition}
+          className="max-w-3xl space-y-4 mb-14 sm:mb-16"
+        >
           <div>
             <Eyebrow dotColor="lime">01 / PROFILE</Eyebrow>
           </div>
@@ -61,12 +70,18 @@ export function ProfileSection() {
           <p className="text-base sm:text-lg text-[#9A9C92] leading-[1.65] max-w-2xl font-normal">
             A background rooted in product thinking, systems engineering, and crafting digital experiences with purpose.
           </p>
-        </div>
+        </motion.div>
 
         {/* Responsive Two-Column on Desktop, Single-Column on Mobile */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-start">
           {/* Main Biography Narrative (7 cols desktop, full width mobile) */}
-          <div className="lg:col-span-7 space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={editorialTransition}
+            className="lg:col-span-7 space-y-6"
+          >
             <div className="p-6 sm:p-10 rounded-2xl bg-[#111210] border border-[rgba(242,240,233,0.10)] space-y-6 shadow-xl">
               <span className="font-mono text-xs uppercase tracking-wider text-[#D4FF69] block">
                 Philosophy & Engineering Focus
@@ -90,10 +105,16 @@ export function ProfileSection() {
                 </Button>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Supporting Specs & Working Approach Cards (5 cols desktop, full width mobile) */}
-          <div className="lg:col-span-5 space-y-6 w-full">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ ...editorialTransition, delay: 0.12 }}
+            className="lg:col-span-5 space-y-6 w-full"
+          >
             {/* Core Profile Card */}
             <div className="p-6 sm:p-8 rounded-2xl bg-[#181916] border border-[rgba(242,240,233,0.10)] space-y-4 shadow-lg hover:border-[rgba(242,240,233,0.22)] transition-colors">
               <div className="flex items-center justify-between pb-4 border-b border-[rgba(242,240,233,0.08)]">
@@ -156,7 +177,7 @@ export function ProfileSection() {
                 ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </Container>
     </section>

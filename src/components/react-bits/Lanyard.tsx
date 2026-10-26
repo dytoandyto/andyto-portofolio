@@ -1190,8 +1190,8 @@ const Lanyard = ({
       const s = settingsRef.current!;
       const aspect = view.width / view.height;
       let viewHeight = layout.height / clamp(s.size, 0.15, 0.9);
-      // Safe framing: allocate at least 25-30% buffer on each side for swings and perspective
-      const safeHorizontalCoverage = aspect < 1 ? Math.min(0.52, 0.46 * Math.max(0.65, aspect)) : 0.50;
+      // Safe framing: allocate calibrated 22-26% buffer on each side for swings and 3D perspective
+      const safeHorizontalCoverage = aspect < 1 ? Math.min(0.56, 0.50 * Math.max(0.65, aspect)) : 0.55;
       const minimumWidth = layout.width / safeHorizontalCoverage;
       if (viewHeight * aspect < minimumWidth) viewHeight = minimumWidth / aspect;
       const viewWidth = viewHeight * aspect;

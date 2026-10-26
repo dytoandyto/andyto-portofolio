@@ -4,9 +4,13 @@ import React from "react";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { InteractiveSkillCard } from "@/components/react-bits/InteractiveSkillCard";
-import RippleGrid from "@/components/react-bits/RippleGrid";
+import MicroSlats from "@/components/react-bits/MicroSlats";
 import { motion } from "motion/react";
-import { snappySpring } from "@/components/motion/motion-variants";
+import {
+  snappySpring,
+  editorialTransition,
+  viewportOnce,
+} from "@/components/motion/motion-variants";
 import {
   Code2,
   Database,
@@ -85,35 +89,45 @@ export function SkillsSection() {
 
   return (
     <section
-      id="capabilities"
-      className="py-20 md:py-32 bg-[#111210] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
+      id="skills"
+      className="py-20 md:py-32 bg-[#111210] border-t border-[rgba(242,240,233,0.08)] relative"
     >
-      {/* 1. Base Decorative Layer: React Bits RippleGrid for structured technical atmosphere */}
+      <span id="capabilities" className="sr-only" aria-hidden="true" />
+      {/* 1. Dedicated Decorative Layer: React Bits MicroSlats for subtle flowing geometric waves */}
       <div
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
-        <RippleGrid
+        <MicroSlats
+          preset="tide"
           color="#252A22"
-          variant="lines"
-          cellSize={46}
-          lineWidth={0.8}
-          glow={0.35}
-          rippleStrength={0.5}
-          rippleSpeed={0.8}
-          rippleSize={1.1}
-          autoRipple="random"
-          rippleInterval={3.8}
-          tilt={32}
-          rotation={-12}
-          opacity={0.45}
-          fade={0.75}
-          mouseInteraction={true}
-          clickRipple={true}
-          intro={false}
+          glintColor="#D4FF69"
+          backgroundColor="rgba(17,18,16,0)"
+          slatWidth={8}
+          slatHeight={22}
+          gap={4}
+          roundness={0.5}
+          scale={1.3}
+          speed={0.22}
+          direction={262}
+          chop={0.2}
+          stretch={0.1}
+          glint={0.45}
+          contrast={1.15}
+          perspective={0.35}
+          fog={0.65}
+          interactive
+          cursorStrength={0.35}
+          cursorSize={36}
+          swirl={0}
+          trail={0.9}
+          lean={0.1}
+          intro
+          introDuration={1.2}
         />
-        {/* Soft edge gradients so Spotlight cards remain the high-contrast priority */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#111210] via-transparent to-[#111210] pointer-events-none" />
+        {/* Soft edge seams so section borders blend seamlessly while preserving slat visibility */}
+        <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#111210] to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#111210] to-transparent pointer-events-none" />
       </div>
 
       <Container className="relative z-10">
@@ -121,8 +135,8 @@ export function SkillsSection() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.01 }}
-          transition={{ duration: 0.5 }}
+          viewport={viewportOnce}
+          transition={editorialTransition}
           className="max-w-3xl space-y-4 mb-14 sm:mb-16"
         >
           <div>
@@ -145,8 +159,8 @@ export function SkillsSection() {
                 key={cat.title}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.01 }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                viewport={viewportOnce}
+                transition={{ ...editorialTransition, delay: idx * 0.08 }}
               >
                 <InteractiveSkillCard
                   spotlightColor="rgba(212, 255, 105, 0.12)"

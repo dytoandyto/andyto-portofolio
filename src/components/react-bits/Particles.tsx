@@ -35,6 +35,7 @@ export interface ParticlesProps {
   opacity?: number;
   lightMode?: boolean;
   paused?: boolean;
+  autoPauseOffscreen?: boolean;
   className?: string;
   style?: CSSProperties;
 }
@@ -82,6 +83,7 @@ export const Particles = ({
   driftSpeed = 0.4,
   opacity = 0.5,
   paused = false,
+  autoPauseOffscreen = true,
   className = '',
   style
 }: ParticlesProps) => {
@@ -288,8 +290,10 @@ export const Particles = ({
 
       ctx.globalAlpha = 1.0;
 
-      if (!reduceMotion) {
+      if (!reduceMotion && (!autoPauseOffscreen || isVisible)) {
         rafId = requestAnimationFrame(render);
+      } else {
+        rafId = 0;
       }
     };
 
@@ -357,6 +361,7 @@ export const Particles = ({
     driftSpeed,
     opacity,
     paused,
+    autoPauseOffscreen,
   ]);
 
   return (

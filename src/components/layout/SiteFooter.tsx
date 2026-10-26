@@ -5,74 +5,60 @@ import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
-import Particles from "@/components/react-bits/Particles";
 import { motion } from "motion/react";
 import {
   containerStaggerVariants,
   fadeInUpVariants,
   snappySpring,
 } from "@/components/motion/motion-variants";
+import { ArrowUpRight } from "lucide-react";
 
 export function SiteFooter() {
-  const currentYear = 2026;
+  const currentYear = new Date().getFullYear();
+  const linkedinUrl = siteConfig.contact.linkedin?.startsWith("http")
+    ? siteConfig.contact.linkedin
+    : `https://${siteConfig.contact.linkedin}`;
 
   return (
-    <footer className="relative w-full bg-[#0D0E0C] text-[#F2F0E9] border-t border-[rgba(242,240,233,0.08)] py-16 md:py-24 overflow-hidden">
-      {/* Restrained continuation of Contact constellation dust */}
-      <div
-        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
-        aria-hidden="true"
-      >
-        <Particles
-          particleCount={32}
-          particleSpread={12}
-          speed={0.03}
-          particleColors={["#D4FF69", "#8E9086"]}
-          particleBaseSize={28}
-          glow={0.2}
-          twinkle={0.2}
-          drift="up"
-          driftSpeed={0.2}
-          connections={false}
-          opacity={0.2}
-          clickBurst={false}
-          moveParticlesOnHover={false}
-          intro={false}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0D0E0C] via-[#0D0E0C]/80 to-[#0D0E0C] pointer-events-none" />
-      </div>
-
-      <Container className="relative z-10">
+    <footer className="w-full bg-[#0E0F0D] text-[#F2F0E9] border-t border-[rgba(242,240,233,0.08)] py-16 md:py-20">
+      <Container>
         <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
           variants={containerStaggerVariants}
-          className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-16 border-b border-[rgba(242,240,233,0.08)]"
+          className="grid grid-cols-1 md:grid-cols-12 gap-12 pb-14 border-b border-[rgba(242,240,233,0.08)]"
         >
-          {/* Identity & Statement */}
+          {/* Identity, Role & Live Availability Status */}
           <motion.div variants={fadeInUpVariants} className="md:col-span-5 space-y-4">
             <Link
               href="/"
-              className="inline-block font-display text-2xl font-semibold tracking-[-0.02em] text-[#F2F0E9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B6DB61]"
+              className="inline-block font-sans text-2xl font-semibold tracking-[-0.025em] text-[#F2F0E9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded"
             >
               {siteConfig.name.toLowerCase()}
               <span className="text-[#D4FF69]">.</span>
             </Link>
-            <p className="font-body text-sm text-[#8E9086] max-w-sm leading-[1.6]">
+            <p className="font-sans text-sm text-[#9A9C92] max-w-sm leading-[1.65]">
               {siteConfig.statement}
             </p>
-            <p className="text-xs font-mono text-[#8E9086]">
-              {siteConfig.role} · {siteConfig.location}
-            </p>
+
+            <div className="pt-2">
+              <div className="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full bg-[#181916] border border-[rgba(242,240,233,0.08)] text-xs font-mono text-[#9A9C92]">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#D4FF69] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D4FF69]" />
+                </span>
+                <span>{siteConfig.availability.label}</span>
+              </div>
+            </div>
           </motion.div>
 
           {/* Navigation Links */}
           <motion.div variants={fadeInUpVariants} className="md:col-span-3 space-y-4">
-            <span className="font-mono text-xs uppercase tracking-wider text-[#8E9086] block">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#9A9C92] block">
               Navigation
             </span>
-            <ul className="space-y-2.5 text-sm font-body">
+            <ul className="space-y-2.5 text-sm font-sans">
               {siteConfig.navItems.map((item) => (
                 <motion.li
                   key={item.href}
@@ -81,7 +67,7 @@ export function SiteFooter() {
                 >
                   <Link
                     href={item.href}
-                    className="text-[#8E9086] hover:text-[#F2F0E9] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B6DB61]"
+                    className="text-[#9A9C92] hover:text-[#F2F0E9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded py-0.5 inline-block"
                   >
                     {item.label}
                   </Link>
@@ -90,19 +76,20 @@ export function SiteFooter() {
             </ul>
           </motion.div>
 
-          {/* Channels & Profiles */}
+          {/* Channels & Connect */}
           <motion.div variants={fadeInUpVariants} className="md:col-span-4 space-y-4">
-            <span className="font-mono text-xs uppercase tracking-wider text-[#8E9086] block">
+            <span className="font-mono text-xs uppercase tracking-widest text-[#9A9C92] block">
               Channels
             </span>
-            <ul className="space-y-2.5 text-sm">
+            <ul className="space-y-2.5 text-sm font-sans">
               {siteConfig.contact.email && (
                 <motion.li whileHover={{ x: 3 }} transition={snappySpring}>
                   <a
                     href={`mailto:${siteConfig.contact.email}`}
-                    className="text-[#D4FF69] hover:underline transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B6DB61]"
+                    className="text-[#D4FF69] hover:underline transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded py-0.5 inline-flex items-center gap-1 font-mono text-xs"
                   >
-                    {siteConfig.contact.email}
+                    <span>{siteConfig.contact.email}</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 </motion.li>
               )}
@@ -112,21 +99,23 @@ export function SiteFooter() {
                     href={siteConfig.contact.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#8E9086] hover:text-[#F2F0E9] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B6DB61]"
+                    className="text-[#9A9C92] hover:text-[#F2F0E9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded py-0.5 inline-flex items-center gap-1"
                   >
-                    GitHub Profile ↗
+                    <span>GitHub Profile</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#9A9C92]" />
                   </a>
                 </motion.li>
               )}
               {siteConfig.contact.linkedin && (
                 <motion.li whileHover={{ x: 3 }} transition={snappySpring}>
                   <a
-                    href={siteConfig.contact.linkedin}
+                    href={linkedinUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[#8E9086] hover:text-[#F2F0E9] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#B6DB61]"
+                    className="text-[#9A9C92] hover:text-[#F2F0E9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded py-0.5 inline-flex items-center gap-1"
                   >
-                    LinkedIn Profile ↗
+                    <span>LinkedIn Profile</span>
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#9A9C92]" />
                   </a>
                 </motion.li>
               )}
@@ -134,10 +123,12 @@ export function SiteFooter() {
           </motion.div>
         </motion.div>
 
-        {/* Bottom bar with dynamic year and return to top */}
-        <div className="flex flex-col sm:flex-row items-center justify-between pt-8 gap-4 text-xs font-mono text-[#8E9086]">
-          <div>
-            <span>© {currentYear} {siteConfig.name}. Designed & engineered with Next.js & Motion.</span>
+        {/* Bottom bar with dynamic year, colophon and return to top */}
+        <div className="flex flex-col sm:flex-row items-center justify-between pt-8 gap-4 text-xs font-mono text-[#9A9C92]">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left">
+            <span>© {currentYear} {siteConfig.name}. All rights reserved.</span>
+            <span className="hidden sm:inline text-[#9A9C92]/40">·</span>
+            <span className="text-[#9A9C92]/80">Crafted with Next.js, TypeScript & Tailwind CSS</span>
           </div>
 
           <ScrollToTop />

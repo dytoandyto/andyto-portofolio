@@ -54,7 +54,7 @@ export function HeroSection() {
           {/* Left Column (or Mobile Stack Top): Personal positioning & Split Text headline */}
           <motion.div
             variants={containerStaggerVariants}
-            initial={false}
+            initial="hidden"
             animate="visible"
             className="lg:col-span-6 space-y-6 sm:space-y-7"
           >
@@ -115,9 +115,9 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ ...gentleSpring, delay: 0.2 }}
-            className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[440px] sm:min-h-[500px] md:min-h-[560px] lg:min-h-[620px] xl:min-h-[660px]"
+            className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[480px] sm:min-h-[540px] md:min-h-[600px] lg:min-h-[660px] xl:min-h-[720px]"
           >
-            <div className="w-full h-[440px] sm:h-[500px] md:h-[560px] lg:h-[620px] xl:h-[660px] relative z-10 flex items-center justify-center">
+            <div className="w-full h-[480px] sm:h-[540px] md:h-[600px] lg:h-[660px] xl:h-[720px] relative z-10 flex items-center justify-center">
               <Lanyard
                 frontImage="/card-front.png"
                 backImage="/card-back.png"
@@ -128,9 +128,9 @@ export function HeroSection() {
                 orientation="portrait"
                 finish="glossy"
                 cornerRadius={0.3}
-                size={0.56}
+                size={0.68}
                 anchor="center"
-                strapLength={0.46}
+                strapLength={0.42}
                 strapColor="#111111"
                 strapWidth={0.65}
                 metal="silver"

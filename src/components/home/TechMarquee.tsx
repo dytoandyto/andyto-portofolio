@@ -5,6 +5,8 @@ import LogoLoop, { LogoItem } from "@/components/react-bits/LogoLoop";
 import DotGrid from "@/components/react-bits/DotGrid";
 import { Container } from "@/components/ui/Container";
 import { Code2 } from "lucide-react";
+import { motion } from "motion/react";
+import { editorialTransition } from "@/components/motion/motion-variants";
 
 import {
   ReactLogo,
@@ -147,7 +149,13 @@ export function TechMarquee() {
 
       <Container className="relative z-10">
         {/* High-Impact Logo Strip with genuine brand colors and smooth edge fades */}
-        <div className="relative rounded-2xl bg-[#111210]/70 border border-[rgba(242,240,233,0.07)] py-3.5 sm:py-4.5 shadow-xl overflow-hidden">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={editorialTransition}
+          className="relative rounded-2xl bg-[#111210]/70 border border-[rgba(242,240,233,0.07)] py-3.5 sm:py-4.5 shadow-xl overflow-hidden"
+        >
           <LogoLoop
             logos={verifiedTechLogos}
             speed={28}
@@ -162,7 +170,7 @@ export function TechMarquee() {
             fadeOutWidth={0.08}
             ariaLabel="Verified production technology stack brand logos"
           />
-        </div>
+        </motion.div>
 
       </Container>
     </section>

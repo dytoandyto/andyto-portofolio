@@ -5,13 +5,15 @@ import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
-import Particles from "@/components/react-bits/Particles";
+import Galaxy from "@/components/react-bits/Galaxy";
 import { Copy, Check, ArrowUpRight, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import {
   containerStaggerVariants,
   fadeInUpVariants,
   snappySpring,
+  editorialTransition,
+  viewportOnce,
 } from "@/components/motion/motion-variants";
 
 export function ContactSection() {
@@ -27,52 +29,52 @@ export function ContactSection() {
 
   return (
     <section id="contact" className="py-28 md:py-40 bg-[#111210] relative overflow-hidden editorial-grain">
-      {/* 1. Base Decorative Layer: React Bits Particles for atmospheric beacon closing */}
+      {/* 1. Base Decorative Layer: React Bits Galaxy for cosmic collaboration beacon */}
       <div
-        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
+        className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#111210]"
         aria-hidden="true"
       >
-        <Particles
-          particleCount={70}
-          particleSpread={10}
-          speed={0.06}
-          particleColors={["#D4FF69", "#F2F0E9", "#8E9086"]}
-          particleBaseSize={32}
-          glow={0.3}
-          twinkle={0.4}
-          drift="up"
-          driftSpeed={0.35}
-          connections={false}
-          connectionDistance={80}
-          opacity={0.45}
-          clickBurst={true}
+        <Galaxy
+          density={1}
+          glowIntensity={0.3}
+          flareIntensity={0.4}
+          starSpeed={0.35}
+          mouseRepulsion={false}
+          clickWarp={false}
           intro={false}
+          transparent={false}
+          backgroundColor="#111210"
+          starColors={["#D4FF69", "#F2F0E9", "#B6DB61", "#8E9086"]}
         />
-        {/* Soft edge fades for seamless connection with footer */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#111210] via-[#111210]/0 to-[#0D0E0C] pointer-events-none" />
+        {/* Subtle top and bottom seam fades to integrate smoothly with neighbor sections */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#111210] via-transparent to-[#0D0E0C] pointer-events-none" />
       </div>
 
       <Container>
-        <div className="max-w-4xl mx-auto text-center space-y-8 relative z-10">
-          <motion.div variants={fadeInUpVariants}>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportOnce}
+          transition={editorialTransition}
+          className="max-w-4xl mx-auto text-center space-y-8 relative z-10"
+        >
+          <div>
             <Eyebrow dotColor="lime" className="justify-center">
               Initiate Collaboration
             </Eyebrow>
-          </motion.div>
+          </div>
 
-          <motion.h2
-            variants={fadeInUpVariants}
+          <h2
             className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.2]"
           >
             Have a thoughtful project in mind<span className="text-[#D4FF69]">?</span>
-          </motion.h2>
+          </h2>
 
-          <motion.p
-            variants={fadeInUpVariants}
+          <p
             className="text-base sm:text-lg text-[#8E9086] leading-[1.65] max-w-2xl mx-auto font-normal"
           >
             Let&apos;s discuss the problem, the people it serves, and what we can build together.
-          </motion.p>
+          </p>
 
           {/* Email quick action row with spring hover physics */}
           {siteConfig.contact.email && (
@@ -145,7 +147,7 @@ export function ContactSection() {
               More contact options →
             </Button>
           </motion.div>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );

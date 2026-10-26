@@ -59,16 +59,16 @@ export const siteConfig: SiteConfig = {
     label: "Available for product roles & bespoke engineering",
   },
   contact: {
-    email: "contact@andyto.dev",
-    github: "https://github.com",
-    linkedin: "https://linkedin.com",
+    email: "otydna1307@gmail.com",
+    github: "https://github.com/dytoandyto",
+    linkedin: "www.linkedin.com/in/andyto-hudianto-a949022bb",
   },
   seo: {
     title: "Andyto — Product-minded Software Engineer",
     titleTemplate: "%s | Andyto",
     description:
       "Personal portfolio of Andyto, a software engineer focusing on frontend architecture, UI/UX implementation, and full-stack product engineering.",
-    siteUrl: "https://andyto.dev",
+    siteUrl: "https://andyto-portofolio.vercel.app",
     locale: "en_US",
   },
   navItems: [

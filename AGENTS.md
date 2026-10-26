@@ -24,4 +24,22 @@ Every future component and modification in this repository MUST comply with thes
    - When integrating components from React Bits, Animate UI, or other libraries, adapt them into the design system immediately.
    - Never render unmodified default component styles that break site typography or color harmony.
 6. **Visual Browser Verification:** Never commit changes without launching the dev server and visually inspecting the actual rendered experience across mobile and desktop viewports.
+7. **Strict Homepage Section Order:** The homepage layout MUST always follow this exact hierarchy:
+   `Hero` → `Looping Technology Marquee` → `Profile` → `Skills` → `Projects` → `Contact` → `Footer`.
+   Never reorder sections based on convenient component imports or delete sections.
+8. **React Bits Background System:** Each section features a dedicated, deliberate React Bits background:
+   - **Hero:** `ShapeGrid` (diagonal dark olive lines with signal-lime accents).
+   - **Tech Marquee:** `DotGrid` (tactile dot matrix with technical spacing).
+   - **Profile:** `DarkVeil` (atmospheric dark silk wave depth).
+   - **Skills:** `RippleGrid` (perspective dynamic ripple lines).
+   - **Projects:** `Aurora` (soft olive/lime ambient light ribbons with offscreen pause).
+   - **Contact & Footer:** `Particles` (ascending constellation beacon dust).
+   Backgrounds must always be `pointer-events-none`, maintain high contrast for readable typography, and pause their animation loops when offscreen via `IntersectionObserver`.
+9. **3D Lanyard Integrity & Framing:**
+   - Preserve safe horizontal camera frustum coverage (`Math.min(0.52, 0.46 * Math.max(0.65, aspect))`) to guarantee the strap, ring, connector, and ID badge are 100% visible and unclipped.
+   - Do not add duplicate phone mockups or secondary panels behind the 3D Lanyard.
+   - Retain runtime dynamic portrait compositing into the badge texture (`/images/profile/andyto-portrait.webp`).
+10. **Authentic Technology Brand Logos:**
+    - Always use verified brand SVG logos retaining their official color identities (e.g. React Cyan `#61DAFB`, TS Blue `#3178C6`, JS Yellow `#F7DF1E`, Tailwind Cyan `#06B6D4`, Vite Purple/Yellow, Laravel Red `#FF2D20`, Node Green `#5FA04E`, Git Orange `#F05032`, etc.).
+    - Never replace tech logos with generic Lucide icons or force monochrome grayscale/invert filters.
 

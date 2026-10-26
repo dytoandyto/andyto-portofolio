@@ -81,3 +81,19 @@ export const iconHoverVariants: Variants = {
     transition: snappySpring,
   },
 };
+
+// Section Viewport Reveal Configurations
+export const viewportOnce = {
+  once: true,
+  amount: 0.15,
+};
+
+export const sectionHeaderVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: editorialTransition,
+  },
+};
+

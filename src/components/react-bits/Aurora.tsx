@@ -56,6 +56,17 @@ export function Aurora({
     handleResize();
     window.addEventListener("resize", handleResize);
 
+    let isVisible = true;
+    const observer = new IntersectionObserver(([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible && !prefersReducedMotion && !animationFrameId) {
+        animationFrameId = requestAnimationFrame(render);
+      }
+    });
+    if (canvas.parentElement) {
+      observer.observe(canvas.parentElement);
+    }
+
     const render = () => {
       if (!ctx || width === 0 || height === 0) return;
 
@@ -110,14 +121,17 @@ export function Aurora({
       ctx.fillStyle = grad3;
       ctx.fillRect(0, 0, w, h);
 
-      if (!prefersReducedMotion) {
+      if (!prefersReducedMotion && isVisible) {
         animationFrameId = requestAnimationFrame(render);
+      } else {
+        animationFrameId = 0;
       }
     };
 
     render();
 
     return () => {
+      observer.disconnect();
       window.removeEventListener("resize", handleResize);
       if (animationFrameId) {
         cancelAnimationFrame(animationFrameId);

@@ -9,9 +9,13 @@ import { Button } from "@/components/ui/Button";
 import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ProjectMockup } from "@/components/projects/ProjectMockup";
 import { InteractiveProjectCard } from "@/components/react-bits/InteractiveProjectCard";
-import { Aurora } from "@/components/react-bits/Aurora";
+import { DarkVeil } from "@/components/react-bits/DarkVeil";
 import { motion } from "motion/react";
-import { snappySpring } from "@/components/motion/motion-variants";
+import {
+  snappySpring,
+  editorialTransition,
+  viewportOnce,
+} from "@/components/motion/motion-variants";
 import { ArrowUpRight } from "lucide-react";
 
 export function ProjectsSection() {
@@ -22,20 +26,28 @@ export function ProjectsSection() {
       id="projects"
       className="py-20 md:py-32 bg-[#141512] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
     >
-      {/* 1. Base Decorative Layer: React Bits Aurora for soft ambient depth around project showcases */}
+      {/* 1. Base Decorative Layer: React Bits DarkVeil for atmospheric flowing silk depth */}
       <div
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
-        <Aurora
-          colorStops={["#111210", "#182416", "#253822", "#D4FF69"]}
-          amplitude={0.9}
-          speed={0.4}
-          blend={0.65}
-          opacity={0.22}
+        <DarkVeil
+          color="#1A2818"
+          speed={0.22}
+          scale={1.2}
+          rotation={-15}
+          flow={0.5}
+          warp={0.1}
+          brightness={0.55}
+          glow={0.18}
+          grain={0.03}
+          opacity={0.28}
+          fade={0.8}
+          mouseInteraction={true}
+          mouseStrength={0.5}
         />
         {/* Subtle dark gradient overlay to frame project cards cleanly */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#141512] via-transparent to-[#141512] pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#141512] via-[#141512]/65 to-[#141512] pointer-events-none" />
       </div>
 
       <Container className="relative z-10">
@@ -43,8 +55,8 @@ export function ProjectsSection() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.01 }}
-          transition={{ duration: 0.5 }}
+          viewport={viewportOnce}
+          transition={editorialTransition}
           className="max-w-3xl space-y-4 mb-14 sm:mb-16"
         >
           <div>
@@ -66,10 +78,10 @@ export function ProjectsSection() {
             return (
               <motion.article
                 key={project.slug}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.01 }}
-                transition={{ duration: 0.5, delay: index * 0.08, ease: [0.16, 1, 0.3, 1] }}
+                viewport={viewportOnce}
+                transition={{ ...editorialTransition, delay: index * 0.1 }}
                 className="group relative rounded-3xl bg-[#111210] border border-[rgba(242,240,233,0.10)] hover:border-[rgba(242,240,233,0.22)] p-6 sm:p-8 md:p-10 shadow-2xl transition-all duration-300"
               >
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
@@ -178,11 +190,17 @@ export function ProjectsSection() {
         </div>
 
         {/* View All Projects Action */}
-        <div className="mt-14 sm:mt-20 text-center">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportOnce}
+          transition={{ ...editorialTransition, delay: 0.15 }}
+          className="mt-14 sm:mt-20 text-center"
+        >
           <Button href="/work" variant="secondary" size="lg" icon>
             View all projects & prototypes ({projects.length})
           </Button>
-        </div>
+        </motion.div>
       </Container>
     </section>
   );
