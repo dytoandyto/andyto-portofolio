@@ -26,7 +26,7 @@ export function ProfileSection() {
   return (
     <section
       id="profile"
-      className="py-20 md:py-32 bg-[#141512] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
+      className="pt-12 sm:pt-14 md:pt-16 lg:pt-18 pb-16 sm:pb-20 md:pb-24 bg-[#141512] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
     >
       {/* 1. Base Decorative Layer: React Bits Threads for flowing craft and human engineering depth */}
       <div
@@ -59,7 +59,7 @@ export function ProfileSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}
           transition={editorialTransition}
-          className="max-w-3xl space-y-4 mb-14 sm:mb-16"
+          className="max-w-3xl space-y-4 mb-8 sm:mb-10 lg:mb-12"
         >
           <div>
             <Eyebrow dotColor="lime">01 / PROFILE</Eyebrow>

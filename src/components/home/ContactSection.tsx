@@ -28,7 +28,7 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-28 md:py-40 bg-[#111210] relative overflow-hidden editorial-grain">
+    <section id="contact" className="py-16 sm:py-20 md:py-24 bg-[#111210] relative overflow-hidden editorial-grain">
       {/* 1. Base Decorative Layer: React Bits Galaxy for cosmic collaboration beacon */}
       <div
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#111210]"

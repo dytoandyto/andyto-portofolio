@@ -20,7 +20,7 @@ export function HeroSection() {
   return (
     <section
       id="hero"
-      className="relative pt-28 pb-14 md:pt-36 md:pb-20 overflow-hidden flex flex-col justify-center bg-[#0C0D0A]"
+      className="relative pt-24 pb-8 sm:pb-10 md:pt-28 md:pb-12 lg:pt-32 lg:pb-14 overflow-hidden flex flex-col justify-center bg-[#0C0D0A]"
     >
       {/* 1. Base Decorative Layer: React Bits ShapeGrid background */}
       <div
@@ -56,7 +56,7 @@ export function HeroSection() {
             variants={containerStaggerVariants}
             initial="hidden"
             animate="visible"
-            className="lg:col-span-6 space-y-6 sm:space-y-7"
+            className="lg:col-span-6 space-y-5 sm:space-y-6"
           >
             <motion.div variants={fadeInUpVariants}>
               <Eyebrow dotColor="lime">
@@ -86,7 +86,7 @@ export function HeroSection() {
             {/* Coordinated CTA Buttons */}
             <motion.div
               variants={fadeInUpVariants}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2"
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1.5"
             >
               <Button href="#projects" variant="lime" size="md" icon>
                 Explore My Work
@@ -99,7 +99,7 @@ export function HeroSection() {
             {/* Quick disciplines badges */}
             <motion.div
               variants={fadeInUpVariants}
-              className="pt-5 border-t border-[rgba(242,240,233,0.08)] flex flex-wrap gap-y-2 gap-x-4 text-xs font-mono text-[#8E9086]"
+              className="pt-4 border-t border-[rgba(242,240,233,0.08)] flex flex-wrap gap-y-2 gap-x-4 text-xs font-mono text-[#8E9086]"
             >
               {siteConfig.disciplines.map((d) => (
                 <span key={d} className="flex items-center gap-1.5">
@@ -114,10 +114,10 @@ export function HeroSection() {
           <motion.div
             initial={{ opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ ...gentleSpring, delay: 0.2 }}
-            className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[480px] sm:min-h-[540px] md:min-h-[600px] lg:min-h-[660px] xl:min-h-[720px]"
+            transition={{ ...gentleSpring, delay: 0.15 }}
+            className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[400px] sm:min-h-[460px] md:min-h-[500px] lg:min-h-[540px] xl:min-h-[600px]"
           >
-            <div className="w-full h-[480px] sm:h-[540px] md:h-[600px] lg:h-[660px] xl:h-[720px] relative z-10 flex items-center justify-center">
+            <div className="w-full h-[400px] sm:h-[460px] md:h-[500px] lg:h-[540px] xl:h-[600px] relative z-10 flex items-center justify-center">
               <Lanyard
                 frontImage="/card-front.png"
                 backImage="/card-back.png"
@@ -144,15 +144,6 @@ export function HeroSection() {
             </div>
           </motion.div>
         </div>
-
-        {/* Scroll down trigger */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.5 }}
-          className="mt-10 sm:mt-14 flex items-center justify-between text-xs font-mono text-[#8E9086] pt-5 border-t border-[rgba(242,240,233,0.06)]"
-        >
-        </motion.div>
       </Container>
     </section>
   );

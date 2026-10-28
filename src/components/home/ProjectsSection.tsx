@@ -24,7 +24,7 @@ export function ProjectsSection() {
   return (
     <section
       id="projects"
-      className="py-20 md:py-32 bg-[#141512] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
+      className="py-16 sm:py-20 md:py-24 bg-[#141512] border-t border-[rgba(242,240,233,0.08)] relative overflow-hidden"
     >
       {/* 1. Base Decorative Layer: React Bits DarkVeil for atmospheric flowing silk depth */}
       <div
@@ -57,7 +57,7 @@ export function ProjectsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
           transition={editorialTransition}
-          className="max-w-3xl space-y-4 mb-14 sm:mb-16"
+          className="max-w-3xl space-y-4 mb-8 sm:mb-10 lg:mb-12"
         >
           <div>
             <Eyebrow dotColor="lime">03 / SELECTED WORK</Eyebrow>
@@ -71,7 +71,7 @@ export function ProjectsSection() {
         </motion.div>
 
         {/* Featured Projects with React Bits Tilted Card Previews */}
-        <div className="space-y-12 sm:space-y-16 md:space-y-20">
+        <div className="space-y-8 sm:space-y-10 md:space-y-12">
           {featuredProjects.map((project, index) => {
             const isReversed = index % 2 === 1;
 

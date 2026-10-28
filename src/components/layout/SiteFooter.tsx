@@ -14,7 +14,12 @@ import {
 import { ArrowUpRight } from "lucide-react";
 
 export function SiteFooter() {
-  const currentYear = new Date().getFullYear();
+  const [currentYear, setCurrentYear] = React.useState<number>(2026);
+
+  React.useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   const linkedinUrl = siteConfig.contact.linkedin?.startsWith("http")
     ? siteConfig.contact.linkedin
     : `https://${siteConfig.contact.linkedin}`;

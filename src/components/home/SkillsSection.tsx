@@ -90,7 +90,7 @@ export function SkillsSection() {
   return (
     <section
       id="skills"
-      className="py-20 md:py-32 bg-[#111210] border-t border-[rgba(242,240,233,0.08)] relative"
+      className="py-16 sm:py-20 md:py-24 bg-[#111210] border-t border-[rgba(242,240,233,0.08)] relative"
     >
       <span id="capabilities" className="sr-only" aria-hidden="true" />
       {/* 1. Dedicated Decorative Layer: React Bits MicroSlats for subtle flowing geometric waves */}
@@ -137,7 +137,7 @@ export function SkillsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={viewportOnce}
           transition={editorialTransition}
-          className="max-w-3xl space-y-4 mb-14 sm:mb-16"
+          className="max-w-3xl space-y-4 mb-8 sm:mb-10 lg:mb-12"
         >
           <div>
             <Eyebrow dotColor="lime">02 / CAPABILITIES</Eyebrow>

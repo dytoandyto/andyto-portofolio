@@ -128,7 +128,7 @@ export function TechMarquee() {
   ];
 
   return (
-    <section className="relative py-7 md:py-9 border-y border-[rgba(242,240,233,0.08)] bg-[#0C0D0A]/90 backdrop-blur-md overflow-hidden">
+    <section className="relative py-5 sm:py-6 md:py-7 border-y border-[rgba(242,240,233,0.08)] bg-[#0C0D0A]/90 backdrop-blur-md overflow-hidden">
       {/* React Bits DotGrid Background: Restrained tactile dot matrix for technical continuity */}
       <div
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
@@ -154,7 +154,7 @@ export function TechMarquee() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={editorialTransition}
-          className="relative rounded-2xl bg-[#111210]/70 border border-[rgba(242,240,233,0.07)] py-3.5 sm:py-4.5 shadow-xl overflow-hidden"
+          className="relative rounded-2xl bg-[#111210]/70 border border-[rgba(242,240,233,0.07)] py-3 sm:py-3.5 shadow-xl overflow-hidden"
         >
           <LogoLoop
             logos={verifiedTechLogos}
