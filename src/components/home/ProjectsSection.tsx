@@ -10,6 +10,7 @@ import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ProjectMockup } from "@/components/projects/ProjectMockup";
 import { InteractiveProjectCard } from "@/components/react-bits/InteractiveProjectCard";
 import { DarkVeil } from "@/components/react-bits/DarkVeil";
+import { SplitText } from "@/components/react-bits/SplitText";
 import { DeferredMount } from "@/components/ui/DeferredMount";
 import { motion } from "motion/react";
 import {
@@ -54,24 +55,39 @@ export function ProjectsSection() {
       </div>
 
       <Container className="relative z-10">
-        {/* Section Heading */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewportOnce}
-          transition={editorialTransition}
-          className="max-w-3xl space-y-4 mb-8 sm:mb-10 lg:mb-12"
-        >
-          <div>
+        {/* Section Heading with Viewport Word Reveal */}
+        <div className="max-w-3xl space-y-4 mb-8 sm:mb-10 lg:mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
             <Eyebrow dotColor="lime">03 / SELECTED WORK</Eyebrow>
-          </div>
-          <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.15]">
-            A selection of things I&apos;ve built<span className="text-[#D4FF69]">.</span>
-          </h2>
-          <p className="text-base sm:text-lg text-[#9A9C92] leading-[1.65] font-normal">
+          </motion.div>
+
+          <SplitText
+            as="h2"
+            text="A selection of things I've built."
+            trigger="view"
+            variant="rise"
+            delay={0.06}
+            stagger={0.05}
+            duration={0.6}
+            accentPunctuation={true}
+            className="text-[clamp(2rem,4vw,3.25rem)] font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.15]"
+          />
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: 0.32, ease: [0.16, 1, 0.3, 1] }}
+            className="text-base sm:text-lg text-[#9A9C92] leading-[1.65] font-normal"
+          >
             Digital products and applications shaped through thoughtful interfaces, implementation, and problem-solving.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
         {/* Featured Projects with React Bits Tilted Card Previews */}
         <div className="space-y-8 sm:space-y-10 md:space-y-12">
@@ -120,38 +136,69 @@ export function ProjectsSection() {
                       <h3 className="text-xl sm:text-2xl md:text-3xl font-semibold text-[#F2F0E9] group-hover:text-white transition-colors tracking-[-0.02em] leading-snug mb-1.5">
                         <Link
                           href={`/work/${project.slug}`}
-                          className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded"
+                          className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded inline-block"
                         >
-                          {project.title}
+                          <SplitText
+                            as="span"
+                            text={project.title}
+                            trigger="view"
+                            variant="rise"
+                            delay={0.08}
+                            stagger={0.045}
+                            duration={0.5}
+                            className="inline-block"
+                          />
                         </Link>
                       </h3>
-                      <p className="text-sm font-medium text-[#D4FF69] tracking-normal mb-2.5">
+                      <motion.p
+                        initial={{ opacity: 0, y: 8 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.45, delay: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-sm font-medium text-[#D4FF69] tracking-normal mb-2.5"
+                      >
                         {project.subtitle}
-                      </p>
-                      <p className="text-sm sm:text-base text-[#9A9C92] leading-[1.65] font-normal">
+                      </motion.p>
+                      <motion.p
+                        initial={{ opacity: 0, y: 10 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, amount: 0.2 }}
+                        transition={{ duration: 0.5, delay: 0.26, ease: [0.16, 1, 0.3, 1] }}
+                        className="text-sm sm:text-base text-[#9A9C92] leading-[1.65] font-normal"
+                      >
                         {project.summary}
-                      </p>
+                      </motion.p>
                     </div>
 
                     {/* Role & Tech Badges */}
-                    <div className="space-y-2 pt-1">
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, amount: 0.2 }}
+                      transition={{ duration: 0.45, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
+                      className="space-y-2 pt-1"
+                    >
                       <span className="font-mono text-[11px] uppercase tracking-wider text-[#8E9086] block">
                         Technologies Used
                       </span>
                       <div className="flex flex-wrap gap-1.5">
-                        {project.technologies.slice(0, 5).map((tech) => (
-                          <span
+                        {project.technologies.slice(0, 5).map((tech, techIdx) => (
+                          <motion.span
                             key={tech}
+                            initial={{ opacity: 0, scale: 0.94 }}
+                            whileInView={{ opacity: 1, scale: 1 }}
+                            viewport={{ once: true, amount: 0.2 }}
+                            transition={{ duration: 0.32, delay: 0.38 + techIdx * 0.04 }}
                             className="font-mono text-xs text-[#8E9086] border border-[rgba(242,240,233,0.08)] px-2.5 py-1 rounded bg-[#181916]"
                           >
                             {tech}
-                          </span>
+                          </motion.span>
                         ))}
                       </div>
-                    </div>
+                    </motion.div>
 
-                    {/* CTA Link */}
-                    <div className="pt-2">
+                    {/* CTA Links */}
+                    <div className="pt-2 flex flex-wrap items-center gap-4">
                       <Link
                         href={`/work/${project.slug}`}
                         className="inline-flex items-center gap-2 text-sm font-medium font-body text-[#F2F0E9] group-hover:text-[#D4FF69] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded"
@@ -164,6 +211,19 @@ export function ProjectsSection() {
                           <ArrowUpRight className="w-4 h-4 text-[#D4FF69]" />
                         </motion.div>
                       </Link>
+
+                      {project.liveUrl && (
+                        <a
+                          href={project.liveUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#D4FF69]/10 border border-[#D4FF69]/25 text-xs font-mono font-medium text-[#D4FF69] hover:bg-[#D4FF69]/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69]"
+                          aria-label={`Visit live project for ${project.title}`}
+                        >
+                          <span>Visit Live Project</span>
+                          <ArrowUpRight className="w-3.5 h-3.5" />
+                        </a>
+                      )}
                     </div>
                   </div>
 

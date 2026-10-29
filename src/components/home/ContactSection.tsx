@@ -7,11 +7,11 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import Galaxy from "@/components/react-bits/Galaxy";
+import { SplitText } from "@/components/react-bits/SplitText";
 import { DeferredMount } from "@/components/ui/DeferredMount";
 import { Copy, Check, ArrowUpRight, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import {
-  fadeInUpVariants,
   snappySpring,
   editorialTransition,
   viewportOnce,
@@ -64,28 +64,48 @@ export function ContactSection() {
           transition={editorialTransition}
           className="max-w-4xl mx-auto text-center space-y-8 relative z-10"
         >
-          <div>
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
             <Eyebrow dotColor="lime" className="justify-center">
               Initiate Collaboration
             </Eyebrow>
-          </div>
+          </motion.div>
 
-          <h2
-            className="text-2xl sm:text-3xl md:text-4xl font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.2]"
-          >
-            Have a thoughtful project in mind<span className="text-[#D4FF69]">?</span>
-          </h2>
+          <SplitText
+            as="h2"
+            text="Have a thoughtful project in mind?"
+            trigger="view"
+            variant="rise"
+            delay={0.08}
+            stagger={0.065}
+            duration={0.65}
+            highlightWord="thoughtful"
+            highlightClassName="font-editorial-accent italic text-[#D4FF69]"
+            accentPunctuation={true}
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.75rem] font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.2]"
+          />
 
-          <p
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: 0.42, ease: [0.16, 1, 0.3, 1] }}
             className="text-base sm:text-lg text-[#8E9086] leading-[1.65] max-w-2xl mx-auto font-normal"
           >
             Let&apos;s discuss the problem, the people it serves, and what we can build together.
-          </p>
+          </motion.p>
 
           {/* Email quick action row with spring hover physics */}
           {siteConfig.contact.email && (
             <motion.div
-              variants={fadeInUpVariants}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.5, delay: 0.56, ease: [0.16, 1, 0.3, 1] }}
               className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4"
             >
               <motion.a
@@ -126,7 +146,10 @@ export function ContactSection() {
 
           {/* Secondary links */}
           <motion.div
-            variants={fadeInUpVariants}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.45, delay: 0.68, ease: [0.16, 1, 0.3, 1] }}
             className="pt-8 flex flex-wrap items-center justify-center gap-6 text-sm font-mono text-[#8E9086]"
           >
             {githubUrl && (

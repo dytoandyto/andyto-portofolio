@@ -98,8 +98,8 @@ export function ProjectCard({
             )}
           </div>
 
-          {/* Action Link */}
-          <div className="pt-2">
+          {/* Action Links */}
+          <div className="pt-2 flex flex-wrap items-center gap-3">
             <Link
               href={`/work/${project.slug}`}
               className="inline-flex items-center gap-2 text-sm font-medium font-body text-[#F2F0E9] group-hover:text-[#D4FF69] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B6DB61] rounded"
@@ -108,6 +108,19 @@ export function ProjectCard({
               <span>Explore case study</span>
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
             </Link>
+
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-md bg-[#D4FF69]/10 border border-[#D4FF69]/25 text-xs font-mono font-medium text-[#D4FF69] hover:bg-[#D4FF69]/20 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B6DB61]"
+                aria-label={`Visit live deployment of ${project.title}`}
+              >
+                <span>Visit Live Project</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
+            )}
           </div>
         </div>
 
@@ -134,3 +147,5 @@ export function ProjectCard({
     </motion.article>
   );
 }
+
+export default ProjectCard;

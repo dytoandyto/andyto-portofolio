@@ -368,10 +368,30 @@ const loadImage = (
   if (cached) return cached;
   const promise = new Promise<HTMLImageElement | null>(resolve => {
     const image = new Image();
-    image.crossOrigin = 'anonymous';
+    // Only set crossOrigin for external URLs to prevent CORS blocking on same-origin static assets
+    if (typeof window !== 'undefined' && (url.startsWith('http://') || url.startsWith('https://'))) {
+      try {
+        const parsed = new URL(url);
+        if (parsed.origin !== window.location.origin) {
+          image.crossOrigin = 'anonymous';
+        }
+      } catch {
+        image.crossOrigin = 'anonymous';
+      }
+    }
     image.decoding = 'async';
     image.onload = () => resolve(image);
-    image.onerror = () => resolve(null);
+    image.onerror = () => {
+      if (image.crossOrigin) {
+        const retry = new Image();
+        retry.decoding = 'async';
+        retry.onload = () => resolve(retry);
+        retry.onerror = () => resolve(null);
+        retry.src = url;
+      } else {
+        resolve(null);
+      }
+    };
     image.src = url;
   });
   cache.set(url, promise);
@@ -1587,7 +1607,7 @@ const Lanyard = ({
           <div className="flex gap-3 items-center py-2">
             <div className="w-16 h-20 rounded-lg overflow-hidden border border-[#252A22] bg-[#111210] flex-shrink-0">
               <NextImage
-                src={portraitImage || frontImage || '/images/profile/andyto-portrait1.webp'}
+                src={portraitImage || frontImage || '/images/profile/andyto-portrait.webp'}
                 alt="Portrait"
                 width={64}
                 height={80}

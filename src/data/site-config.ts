@@ -41,9 +41,9 @@ export const siteConfig: SiteConfig = {
   identity: {
     name: "Andyto",
     role: "Product-minded Software Engineer",
-    portrait: "/images/profile/andyto-portrait1.webp",
+    portrait: "/images/profile/andyto-portrait.webp",
   },
-  portrait: "/images/profile/andyto-portrait1.webp",
+  portrait: "/images/profile/andyto-portrait.webp",
   disciplines: [
     "Frontend Engineering",
     "UI/UX Implementation",

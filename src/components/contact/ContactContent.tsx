@@ -6,6 +6,8 @@ import { ensureAbsoluteUrl } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
+import { SplitText } from "@/components/react-bits/SplitText";
+import { motion } from "motion/react";
 import {
   Copy,
   Check,
@@ -58,15 +60,38 @@ export function ContactContent() {
   return (
     <div className="pt-32 md:pt-40 pb-24 md:pb-36">
       <Container>
-        {/* Header */}
+        {/* Header with SplitText */}
         <div className="max-w-3xl space-y-4 mb-16">
-          <Eyebrow dotColor="lime">Direct Inquiries</Eyebrow>
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#F2F0E9] tracking-[-0.03em] leading-[1.14]">
-            Let&apos;s build something thoughtful together<span className="text-[#D4FF69]">.</span>
-          </h1>
-          <p className="text-base sm:text-lg text-[#8E9086] leading-[1.65] font-normal">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <Eyebrow dotColor="lime">Direct Inquiries</Eyebrow>
+          </motion.div>
+
+          <SplitText
+            as="h1"
+            text="Let's build something thoughtful together."
+            trigger="load"
+            variant="rise"
+            delay={0.06}
+            stagger={0.05}
+            duration={0.6}
+            highlightWord="thoughtful"
+            highlightClassName="font-editorial-accent italic text-[#D4FF69]"
+            accentPunctuation={true}
+            className="text-3xl sm:text-4xl md:text-5xl font-semibold text-[#F2F0E9] tracking-[-0.03em] leading-[1.14]"
+          />
+
+          <motion.p
+            initial={{ opacity: 0, y: 14 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="text-base sm:text-lg text-[#8E9086] leading-[1.65] font-normal"
+          >
             Whether you have a product engineering inquiry, an interface design challenge, or want to explore collaboration, I would love to hear from you.
-          </p>
+          </motion.p>
         </div>
 
         {/* Contact Grid */}

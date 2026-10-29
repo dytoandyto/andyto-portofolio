@@ -15,19 +15,20 @@ export interface Project {
   technologies: string[];
   summary: string;
   featured: boolean;
-  problem: string;
-  goals: string[];
-  contribution: string;
-  decisions: ProjectDecision[];
-  challenges: string[];
-  outcomes: string[];
-  lessons: string[];
+  problem?: string;
+  goals?: string[];
+  contribution?: string;
+  decisions?: ProjectDecision[];
+  challenges?: string[];
+  outcomes?: string[];
+  lessons?: string[];
   coverGradient: {
     from: string;
     to: string;
     accent: string;
   };
   mockupType: "dashboard" | "kanban" | "portal";
+  coverImage?: string;
   repositoryUrl?: string;
   liveUrl?: string;
 }
@@ -36,68 +37,58 @@ export const projects: Project[] = [
   {
     slug: "classhub",
     title: "ClassHub",
-    subtitle: "Modern Academic Cohort & Schedule Portal",
+    subtitle: "Academic Timetable & Cohort Hub",
     category: ["Full-Stack", "Frontend", "UI/UX"],
-    status: "in-progress",
-    statusLabel: "Active Development",
+    status: "prototype",
+    statusLabel: "Functional Prototype",
     year: "2025 – 2026",
     role: [
       "Frontend Architecture",
       "UI/UX Implementation",
-      "Full-Stack Integration",
+      "Academic Workflow Modeling",
     ],
     technologies: [
       "Next.js",
       "React 19",
       "TypeScript",
       "Tailwind CSS",
-      "Prisma ORM",
-      "PostgreSQL",
-      "TipTap",
       "Lucide Icons",
+      "Vercel",
     ],
     summary:
-      "A centralized academic platform unifying class schedules, assignment deadlines, student directory, and rich shared learning resources in an accessible, high-performance interface.",
+      "A centralized academic portal for Telkom University Jakarta cohort JS1SI-26-REG-05, consolidating daily lecture timetables, assignment deadlines, campus portal access, and cohort resources into an accessible digital hub.",
     featured: true,
     problem:
-      "University class cohorts typically scatter vital academic updates across disjointed instant messaging groups, drive folders, and ad-hoc spreadsheets. Deadlines get lost, class locations are hard to find on mobile between lectures, and collaborative achievements lack a dedicated home.",
+      "University class cohorts coordinate academic updates across fragmented messaging chats, drive folders, and ad-hoc spreadsheets. Lecture room changes get lost between periods, assignment deadlines lack unified urgency tracking, and shared learning resources are difficult to locate on mobile devices.",
     goals: [
-      "Consolidate daily and weekly lecture timetables with rapid mobile lookup.",
-      "Provide transparent assignment tracking with urgency and completion filters.",
-      "Establish an authentic student directory featuring personal goals and project links.",
-      "Deliver a rich-text announcement and article publisher for class leadership.",
+      "Consolidate daily and weekly lecture timetables with fast mobile-friendly lookup.",
+      "Track active assignments, course deadlines, and urgent project submissions.",
+      "Provide quick-access launchers to essential Telkom University systems (MyTelU, LMS Tel-U CeLOE, iGracias).",
+      "Organize educational articles, course materials, lecture notes, and cohort directory.",
     ],
     contribution:
-      "Spearheaded the frontend component architecture, responsive layout design, and relational database schema modeling. Implemented the weekly timetable views, student showcase directory, and integration with PostgreSQL via Prisma.",
+      "Engineered the responsive Next.js web application, implemented the high-contrast dark academic interface with Tailwind CSS, and structured timetable, assignment, and resource navigation.",
     decisions: [
       {
-        title: "Hybrid Server Components with Client Interactivity",
+        title: "Immediate Lecture Information Hierarchy",
         explanation:
-          "Kept the public directory and timetable SSR-first for instant page loads and zero layout shift, isolating client state only to interactive filters and rich-text editing modules.",
+          "Organized the homepage view to immediately surface today's active lectures and nearest assignment deadlines before secondary navigational resources.",
       },
       {
-        title: "Rigorous Image & Document Validation Pipeline",
+        title: "Integrated Campus Portal Ecosystem",
         explanation:
-          "Implemented binary magic-byte inspection on upload handlers to prevent file extension spoofing before persisting student avatars and gallery media to Supabase storage.",
-      },
-      {
-        title: "TipTap Modular Editor Integration",
-        explanation:
-          "Structured announcement publishing around TipTap extensions to allow structured headings, code snippets, and callouts without exposing raw HTML injection vulnerabilities.",
+          "Designed direct launch pathways to core Telkom University portals (MyTelU, LMS CeLOE, and iGracias) to minimize context switching for daily academic routines.",
       },
     ],
     challenges: [
-      "Handling dynamic time zone calculations across varied student devices while keeping server-rendered timetable schedules strictly deterministic.",
-      "Optimizing complex student directory filter combinations without triggering redundant database roundtrips.",
+      "Designing a responsive timetable grid and deadline reminder system that remains completely readable and touch-friendly on narrow mobile screens (360px–390px).",
     ],
     outcomes: [
-      "Unified all recurring weekly schedules, room allocations, and lecturer contacts in a single-tap responsive UI.",
-      "Eliminated deadline ambiguity with clear, time-weighted task status states.",
-      "Engineered an extensible Prisma schema accommodating profiles, achievements, and rich announcements.",
+      "Built and deployed a functioning academic class hub unifying weekly timetables, active assignments, and campus portal gateways.",
+      "Established an accessible digital home for class JS1SI-26-REG-05 deployed live on Vercel.",
     ],
     lessons: [
-      "Deepened understanding of strict type safety between Prisma queries and Next.js Server Component boundaries.",
-      "Reinforced the value of fluid mobile design for students walking across campus needing immediate class room numbers.",
+      "Academic productivity tools require zero visual friction—students checking room numbers or assignment deadlines between classes need immediate, high-contrast clarity.",
     ],
     coverGradient: {
       from: "#1A231C",
@@ -105,123 +96,74 @@ export const projects: Project[] = [
       accent: "#72E58A",
     },
     mockupType: "portal",
-  },
-  {
-    slug: "sada-taskly",
-    title: "Sada-Taskly",
-    subtitle: "Contextual Team Workflow & Task Operations Engine",
-    category: ["Full-Stack", "Frontend", "Product"],
-    status: "in-progress",
-    statusLabel: "In Development",
-    year: "2025",
-    role: [
-      "Frontend Systems",
-      "Component Architecture",
-      "Inertia.js Integration",
-    ],
-    technologies: [
-      "Laravel",
-      "Inertia.js",
-      "React",
-      "TypeScript",
-      "Tailwind CSS",
-      "MySQL",
-    ],
-    summary:
-      "A work management application focused on structured task delegation, role-based workflows, workspace coordination, and high-clarity operational dashboards.",
-    featured: true,
-    problem:
-      "Modern project management tools often suffer from feature bloat, confusing multi-tier hierarchies, and sluggish drag-and-drop interfaces that distract teams from shipping core deliverables.",
-    goals: [
-      "Build a frictionless task creation and assignment loop with minimal input friction.",
-      "Implement role-governed workspace permissions separating admins, managers, and contributors.",
-      "Provide clean operational metrics covering task velocity, backlog bottlenecks, and status distributions.",
-    ],
-    contribution:
-      "Designed the React frontend layer connected seamlessly to Laravel through Inertia.js. Authored the reusable design tokens, modal overlays, workspace switcher, and optimistic UI updates for task status transitions.",
-    decisions: [
-      {
-        title: "Inertia.js Monolith over Decoupled Micro-services",
-        explanation:
-          "Chose Inertia.js to maintain the rapid prototyping speed and security of Laravel controllers while delivering the snappy, client-rendered experience of a React single-page app without the overhead of client-side OAuth tokens.",
-      },
-      {
-        title: "Optimistic State Mutation for Task Cards",
-        explanation:
-          "Implemented instant visual feedback on column changes and completion toggles, reconciling asynchronously with backend validation to eliminate UI lag.",
-      },
-    ],
-    challenges: [
-      "Balancing client-side optimism with transactional database consistency during rapid concurrent task reassignments.",
-      "Maintaining clean TypeScript definitions mirroring Laravel Eloquent model transformations.",
-    ],
-    outcomes: [
-      "Achieved sub-100ms perceived transition speeds for task status updates through Inertia partial reloads.",
-      "Built a cohesive, high-contrast dark dashboard theme engineered for long hours of project triage.",
-    ],
-    lessons: [
-      "Inertia.js offers tremendous productivity for full-stack developers when strict data contracts are enforced with TypeScript interfaces.",
-    ],
-    coverGradient: {
-      from: "#221C18",
-      to: "#14100D",
-      accent: "#FFAE5E",
-    },
-    mockupType: "kanban",
+    coverImage: "/images/projects/classhub-cover.webp",
+    liveUrl: "https://tuj-si-2605.vercel.app/",
+    // Note: Public source repository is not published; omitted to preserve content integrity.
   },
   {
     slug: "suarasiswa",
     title: "SuaraSiswa",
-    subtitle: "Structured Campus Voice & Grievance Routing Engine",
-    category: ["Product", "UI/UX", "Frontend"],
+    subtitle: "AI-Powered Student Helpdesk & Report Management System",
+    category: ["Full-Stack", "Product", "UI/UX"],
     status: "prototype",
     statusLabel: "Functional Prototype",
     year: "2025",
     role: [
-      "Product Strategy",
-      "Information Architecture",
-      "Frontend Engineering",
+      "Full-Stack Engineering",
+      "AI Integration",
+      "Database Architecture",
     ],
     technologies: [
-      "Next.js",
+      "Laravel 12",
+      "React 19",
+      "Inertia.js",
       "TypeScript",
       "Tailwind CSS",
-      "Zod",
-      "Framer Motion",
+      "MySQL",
+      "Google Gemini API",
+      "Lucide Icons",
     ],
     summary:
-      "A transparent campus feedback and grievance triage platform allowing students to submit verifiable academic concerns, track institutional resolution steps, and view public accountability metrics.",
+      "An AI-integrated student helpdesk and report management platform connecting students, administration, and school departments. Features automated grievance routing and consultation powered by Google Gemini 1.5 Flash.",
     featured: true,
     problem:
-      "Campus student complaints regarding campus facilities, academic administration, and course scheduling are frequently dropped into black-hole email inboxes with zero resolution tracking, resulting in student disengagement and administrative opacity.",
+      "School student grievances and facility reports are commonly handled through informal messaging or paper forms with zero status tracking, resulting in unresolved issues, administrative opacity, and lack of accountability between school divisions.",
     goals: [
-      "Design a confidential yet verifiable submission workflow categorized by department.",
-      "Provide a public timeline for issue status: Received, Under Review, In Progress, and Resolved.",
-      "Introduce an administrative triage interface with priority tagging and public resolution logs.",
+      "Integrate an AI Assistant powered by Google Gemini 1.5 Flash for instant school consultation and automated report classification.",
+      "Establish strict Role-Based Access Control (RBAC) separating Siswa (students), Admin, and Staff Divisions (Sarpras, Hubin, SIMS, Kesiswaan, Kurikulum).",
+      "Provide dynamic real-time triage dashboards with status workflows (Masuk, Proses, Selesai).",
+      "Ensure database-level integrity for status updates through custom MySQL Stored Procedures.",
+      "Enable transparent student feedback with star ratings and official report generation (PDF and Excel).",
     ],
     contribution:
-      "Conceived the information hierarchy, conducted problem interviews, developed interactive prototypes, and built the accessible submission form wizard with client and server schema validation.",
+      "Built the full-stack system using Laravel 12 and React 19 via Inertia.js. Integrated the Google Gemini 1.5 Flash API for chatbot consultation and auto-routing. Authored the database schema with MySQL Stored Procedures for report state transitions, and built the responsive Tailwind CSS dashboard.",
     decisions: [
       {
-        title: "Multi-Step Progressive Disclosure Wizard",
+        title: "Google Gemini 1.5 Flash for Intelligent Helpdesk Triage",
         explanation:
-          "Broke down complex reporting into digestible, guided phases (Category -> Context -> Evidence -> Review) to reduce drop-off rates and improve report quality.",
+          "Integrated Gemini via API to analyze student complaint text, determine the relevant school division automatically (Sarpras, Kurikulum, etc.), and provide 24/7 conversational assistance.",
       },
       {
-        title: "Privacy-Preserving Verification",
+        title: "Inertia.js Full-Stack Architecture",
         explanation:
-          "Structured the submission protocol to authenticate student validity while allowing identity masking on public department dashboards.",
+          "Coupled Laravel 12 backend security and ORM capabilities directly to React 19 client components without the operational overhead of a separate decoupled API gateway.",
+      },
+      {
+        title: "Database Stored Procedures for Status Integrity",
+        explanation:
+          "Implemented SQL-level stored procedures for report status transitions to enforce atomic, tamper-resistant audit trails directly at the database layer.",
       },
     ],
     challenges: [
-      "Designing an unbiased administrative priority scoring system that prevents spam reports while surfacing critical safety and educational blockers.",
+      "Prompt-engineering the Gemini assistant to accurately categorize edge-case student complaints and format structured division dispatch payloads.",
+      "Designing granular role-based authorization so division staff can only modify tickets assigned to their specific department.",
     ],
     outcomes: [
-      "Created a high-fidelity interactive prototype demonstrating the complete end-to-end reporting and department review cycle.",
-      "Validated the user journey with fellow students, confirming significant clarity improvements over unstructured forms.",
+      "Successfully engineered and demonstrated a functioning multi-role student helpdesk platform with automated Gemini AI dispatching.",
+      "Implemented student feedback loops with rating reviews and official school PDF/Excel report exports.",
     ],
     lessons: [
-      "Designing for civic/academic communication requires extreme clarity in typography and status semantics — every state change carries emotional weight.",
+      "Combining LLM capabilities with traditional relational databases requires strict JSON schema guards at the API boundary to prevent unpredictable model responses from corrupting structured records.",
     ],
     coverGradient: {
       from: "#1E1A29",
@@ -229,5 +171,8 @@ export const projects: Project[] = [
       accent: "#B89BFF",
     },
     mockupType: "dashboard",
+    repositoryUrl:
+      "https://github.com/dytoandyto/SuaraSiswa-AI-Powered-Student-Helpdesk-Aspiration-System",
+    // Note: Live cloud deployment is not currently hosted; omitted to preserve content integrity.
   },
 ];

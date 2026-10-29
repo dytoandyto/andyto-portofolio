@@ -127,10 +127,7 @@ export function SiteFooter() {
         <div className="flex flex-col sm:flex-row items-center justify-between pt-8 gap-4 text-xs font-mono text-[#9A9C92]">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-6 text-center sm:text-left">
             <span>© {currentYear} {siteConfig.name}. All rights reserved.</span>
-            <span className="hidden sm:inline text-[#9A9C92]/40">·</span>
-            <span className="text-[#9A9C92]/80">Crafted with Next.js, TypeScript & Tailwind CSS</span>
           </div>
-
           <ScrollToTop />
         </div>
       </Container>

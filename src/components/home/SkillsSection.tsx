@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { InteractiveSkillCard } from "@/components/react-bits/InteractiveSkillCard";
 import MicroSlats from "@/components/react-bits/MicroSlats";
+import { BlurText } from "@/components/react-bits/BlurText";
 import { DeferredMount } from "@/components/ui/DeferredMount";
 import { motion } from "motion/react";
 import {
@@ -51,39 +52,37 @@ export function SkillsSection() {
         "Developing scalable backend APIs, database models, and resilient server-side workflows.",
       icon: Database,
       technologies: [
-        { name: "Laravel", note: "Inertia.js, Eloquent ORM, Auth" },
-        { name: "PHP", note: "Modern 8.x typed architecture" },
-        { name: "PostgreSQL / MySQL", note: "Relational schema design" },
-        { name: "Prisma ORM", note: "Type-safe database queries" },
-        { name: "RESTful APIs", note: "Clean contracts & validation" },
+        { name: "Node.js", note: "REST endpoints, async runtimes" },
+        { name: "PostgreSQL", note: "Relational modeling, indexing" },
+        { name: "Prisma ORM", note: "Schema migrations, query client" },
+        { name: "Laravel / PHP", note: "MVC architecture, artisan tooling" },
+        { name: "Docker", note: "Reproducible container environments" },
       ],
     },
     {
-      title: "UI/UX & Interaction",
-      tag: "Product Craft",
+      title: "Design Systems & UI/UX",
+      tag: "Tactile Experience",
       description:
-        "Translating complex product requirements into intuitive typographic hierarchy, fluid grids, and tactile feedback.",
+        "Crafting coherent design tokens, fluid typography, and accessible interactive behaviors that feel natural.",
       icon: LayoutTemplate,
       technologies: [
-        { name: "Motion for React", note: "Spring physics, viewport reveals" },
-        { name: "Design Systems", note: "Editorial typography, color tokens" },
-        { name: "Responsive Layouts", note: "Fluid clamp formulas, grid/flex" },
-        { name: "Accessibility (a11y)", note: "WCAG 2.2 AA contrast, ARIA" },
-        { name: "Component Systems", note: "Atomic, reusable primitives" },
+        { name: "Figma", note: "Component libraries, autolayout, tokens" },
+        { name: "Design Tokens", note: "Semantic color, fluid typography scale" },
+        { name: "Motion Design", note: "Micro-interactions, spring transitions" },
+        { name: "Accessibility (WCAG)", note: "Semantic HTML, keyboard focus, contrast" },
       ],
     },
     {
-      title: "Tools & Engineering Workflow",
-      tag: "DevOps & Quality",
+      title: "Quality & Infrastructure",
+      tag: "Reliable Shipping",
       description:
-        "Maintaining disciplined version control, testing pipelines, and developer tooling for dependable delivery.",
+        "Ensuring software stability through strict static analysis, cross-browser verification, and clean build automation.",
       icon: Wrench,
       technologies: [
-        { name: "Git & GitHub", note: "Branching, PRs, version control" },
-        { name: "Figma", note: "Wireframing, tokens inspection" },
-        { name: "Browser DevTools", note: "Performance, DOM, Network profiling" },
-        { name: "Testing & Quality", note: "Component unit tests, ESLint" },
-        { name: "Node.js & npm", note: "Modern package management" },
+        { name: "Git & GitHub", note: "Branching strategies, code review workflows" },
+        { name: "ESLint & Prettier", note: "Automated lint rules, code formatting" },
+        { name: "Vite & Turbopack", note: "Instant HMR, production bundle optimization" },
+        { name: "Performance Auditing", note: "Core Web Vitals, LCP/CLS optimization" },
       ],
     },
   ];
@@ -101,32 +100,32 @@ export function SkillsSection() {
       >
         <DeferredMount className="contents">
           <MicroSlats
-          preset="tide"
-          color="#252A22"
-          glintColor="#D4FF69"
-          backgroundColor="rgba(17,18,16,0)"
-          slatWidth={8}
-          slatHeight={22}
-          gap={4}
-          roundness={0.5}
-          scale={1.3}
-          speed={0.22}
-          direction={262}
-          chop={0.2}
-          stretch={0.1}
-          glint={0.45}
-          contrast={1.15}
-          perspective={0.35}
-          fog={0.65}
-          interactive
-          cursorStrength={0.35}
-          cursorSize={36}
-          swirl={0}
-          trail={0.9}
-          lean={0.1}
-          intro
-          introDuration={1.2}
-        />
+            preset="tide"
+            color="#252A22"
+            glintColor="#D4FF69"
+            backgroundColor="rgba(17,18,16,0)"
+            slatWidth={8}
+            slatHeight={22}
+            gap={4}
+            roundness={0.5}
+            scale={1.3}
+            speed={0.22}
+            direction={262}
+            chop={0.2}
+            stretch={0.1}
+            glint={0.45}
+            contrast={1.15}
+            perspective={0.35}
+            fog={0.65}
+            interactive
+            cursorStrength={0.35}
+            cursorSize={36}
+            swirl={0}
+            trail={0.9}
+            lean={0.1}
+            intro
+            introDuration={1.2}
+          />
         </DeferredMount>
         {/* Soft edge seams so section borders blend seamlessly while preserving slat visibility */}
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#111210] to-transparent pointer-events-none" />
@@ -135,23 +134,39 @@ export function SkillsSection() {
 
       <Container className="relative z-10">
         {/* Section Heading with Viewport Reveal */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={viewportOnce}
-          transition={editorialTransition}
-          className="max-w-3xl space-y-4 mb-8 sm:mb-10 lg:mb-12"
-        >
-          <div>
+        <div className="max-w-3xl space-y-4 mb-8 sm:mb-10 lg:mb-12">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+          >
             <Eyebrow dotColor="lime">02 / CAPABILITIES</Eyebrow>
-          </div>
-          <h2 className="text-[clamp(2rem,4vw,3.25rem)] font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.15]">
-            The tools behind the work<span className="text-[#D4FF69]">.</span>
-          </h2>
-          <p className="text-base sm:text-lg text-[#9A9C92] leading-[1.65] max-w-2xl font-normal">
+          </motion.div>
+
+          <BlurText
+            as="h2"
+            text="The tools behind the work."
+            trigger="view"
+            direction="bottom"
+            initialBlur={10}
+            delay={0.055}
+            initialDelay={0.08}
+            duration={0.55}
+            accentPunctuation={true}
+            className="text-[clamp(2rem,4vw,3.25rem)] font-semibold tracking-[-0.025em] text-[#F2F0E9] leading-[1.15]"
+          />
+
+          <motion.p
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ duration: 0.55, delay: 0.35, ease: [0.16, 1, 0.3, 1] }}
+            className="text-base sm:text-lg text-[#9A9C92] leading-[1.65] max-w-2xl font-normal"
+          >
             A structured breakdown of core engineering capabilities, frameworks, and verified technologies across software disciplines.
-          </p>
-        </motion.div>
+          </motion.p>
+        </div>
 
         {/* Grid of React Bits Spotlight Cards */}
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-6 sm:gap-8">
@@ -160,7 +175,7 @@ export function SkillsSection() {
             return (
               <motion.div
                 key={cat.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={viewportOnce}
                 transition={{ ...editorialTransition, delay: idx * 0.08 }}

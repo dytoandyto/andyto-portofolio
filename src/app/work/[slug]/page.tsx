@@ -37,9 +37,7 @@ export async function generateMetadata({
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) {
-    return {
-      title: "Project Not Found",
-    };
+    notFound();
   }
 
   return {
@@ -123,7 +121,7 @@ export default async function ProjectDetailPage({ params }: PageProps) {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D4FF69] text-[#111210] font-semibold text-xs font-mono hover:bg-[#c2f34e] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B6DB61]"
                 >
-                  <span>Live Preview</span>
+                  <span>Visit Live Project</span>
                   <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               )}

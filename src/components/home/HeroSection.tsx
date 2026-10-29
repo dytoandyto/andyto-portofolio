@@ -5,15 +5,11 @@ import { siteConfig } from "@/data/site-config";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
-import { AnimatedHeadline } from "@/components/react-bits/AnimatedHeadline";
+import { SplitText } from "@/components/react-bits/SplitText";
 import ShapeGrid from "@/components/react-bits/ShapeGrid";
 import Lanyard from "./Lanyard";
 import { motion } from "motion/react";
-import {
-  containerStaggerVariants,
-  fadeInUpVariants,
-  gentleSpring,
-} from "@/components/motion/motion-variants";
+import { gentleSpring } from "@/components/motion/motion-variants";
 
 export function HeroSection() {
   return (
@@ -50,54 +46,72 @@ export function HeroSection() {
 
       <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
-          {/* Left Column (or Mobile Stack Top): Personal positioning & Split Text headline */}
-          <motion.div
-            variants={containerStaggerVariants}
-            initial="hidden"
-            animate="visible"
-            className="lg:col-span-6 space-y-5 sm:space-y-6"
-          >
-            <motion.div variants={fadeInUpVariants}>
+          {/* Left Column: Personal positioning & Sequential Split Text headline */}
+          <div className="lg:col-span-6 space-y-5 sm:space-y-6">
+            {/* Step 1: Eyebrow entrance */}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.05, ease: [0.16, 1, 0.3, 1] }}
+            >
               <Eyebrow dotColor="lime">
                 SOFTWARE ENGINEER · DIGITAL PRODUCT BUILDER
               </Eyebrow>
             </motion.div>
 
-            {/* React Bits Split Text Animated Headline */}
+            {/* Step 2: React Bits Split Text Animated Headline */}
             <div className="text-[clamp(2.35rem,5.5vw,4.25rem)] font-semibold tracking-[-0.035em] text-[#F2F0E9] leading-[1.1]">
-              <AnimatedHeadline
+              <SplitText
+                as="h1"
                 text={"I turn complex ideas\ninto thoughtful digital products."}
                 highlightWord="thoughtful"
+                highlightClassName="text-[#D4FF69] font-editorial-accent italic font-normal"
+                trigger="load"
+                variant="rise"
                 delay={0.12}
-                duration={0.65}
-                stagger={0.045}
+                duration={0.58}
+                stagger={0.055}
+                className="font-sans tracking-[-0.03em] leading-[1.12]"
               />
             </div>
 
-            {/* Supporting Paragraph with subtle fade entrance */}
+            {/* Step 3: Supporting Paragraph entering after headline words */}
             <motion.p
-              variants={fadeInUpVariants}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.34, ease: [0.16, 1, 0.3, 1] }}
               className="text-base sm:text-lg text-[#9A9C92] leading-[1.65] max-w-xl font-normal"
             >
               I build digital experiences that bring together useful interfaces, product thinking, and reliable engineering.
             </motion.p>
 
-            {/* Coordinated CTA Buttons */}
-            <motion.div
-              variants={fadeInUpVariants}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1.5"
-            >
-              <Button href="#projects" variant="lime" size="md" icon>
-                Explore My Work
-              </Button>
-              <Button href="#profile" variant="secondary" size="md">
-                About Me
-              </Button>
-            </motion.div>
+            {/* Step 4: Coordinated CTA Buttons entering with short stagger */}
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-1.5">
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.52, type: "spring", stiffness: 220, damping: 22 }}
+              >
+                <Button href="#projects" variant="lime" size="md" icon>
+                  Explore My Work
+                </Button>
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.62, type: "spring", stiffness: 220, damping: 22 }}
+              >
+                <Button href="#profile" variant="secondary" size="md">
+                  About Me
+                </Button>
+              </motion.div>
+            </div>
 
-            {/* Quick disciplines badges */}
+            {/* Step 5: Quick disciplines badges */}
             <motion.div
-              variants={fadeInUpVariants}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.45, delay: 0.75, ease: [0.16, 1, 0.3, 1] }}
               className="pt-4 border-t border-[rgba(242,240,233,0.08)] flex flex-wrap gap-y-2 gap-x-4 text-xs font-mono text-[#8E9086]"
             >
               {siteConfig.disciplines.map((d) => (
@@ -107,13 +121,13 @@ export function HeroSection() {
                 </span>
               ))}
             </motion.div>
-          </motion.div>
+          </div>
 
-          {/* Right Column (or Mobile Stack Below): React Bits 3D Interactive Lanyard suspended against background */}
+          {/* Right Column: React Bits 3D Interactive Lanyard entrance coordinated with headline */}
           <motion.div
             initial={{ opacity: 0, scale: 0.94, y: 24 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            transition={{ ...gentleSpring, delay: 0.15 }}
+            transition={{ ...gentleSpring, delay: 0.25 }}
             className="lg:col-span-6 relative flex items-center justify-center w-full min-h-[400px] sm:min-h-[460px] md:min-h-[500px] lg:min-h-[540px] xl:min-h-[600px]"
           >
             <div className="w-full h-[400px] sm:h-[460px] md:h-[500px] lg:h-[540px] xl:h-[600px] relative z-10 flex items-center justify-center">

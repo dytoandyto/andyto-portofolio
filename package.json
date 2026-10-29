@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "validate:projects": "node scripts/validate-projects.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

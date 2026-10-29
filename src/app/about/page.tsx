@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from "react";
 import type { Metadata } from "next";
 import { siteConfig } from "@/data/site-config";
@@ -115,6 +116,29 @@ export default function AboutPage() {
           {/* Sidebar Highlight Box (5 cols) */}
           <div className="lg:col-span-5 space-y-6">
             <div className="p-6 sm:p-8 rounded-2xl bg-[#181916] border border-[rgba(242,240,233,0.1)] space-y-6">
+              <div className="flex items-center gap-4 pb-4 border-b border-[rgba(242,240,233,0.08)]">
+                <div className="relative w-14 h-14 rounded-full overflow-hidden border border-[rgba(212,255,105,0.35)] bg-[#111210] shrink-0">
+                  <Image
+                    src={siteConfig.identity?.portrait || siteConfig.portrait || "/images/profile/andyto-portrait.webp"}
+                    alt={siteConfig.name}
+                    width={56}
+                    height={56}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div>
+                  <h3 className="font-display text-lg font-semibold text-[#F2F0E9]">
+                    {siteConfig.name}
+                  </h3>
+                  <p className="font-mono text-xs text-[#D4FF69]">
+                    {siteConfig.role}
+                  </p>
+                  <p className="font-mono text-[11px] text-[#8E9086] mt-0.5">
+                    {siteConfig.location}
+                  </p>
+                </div>
+              </div>
+
               <span className="font-mono text-xs uppercase tracking-wider text-[#D4FF69] block">
                 Technical Focus Profile
               </span>

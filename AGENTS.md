@@ -42,4 +42,16 @@ Every future component and modification in this repository MUST comply with thes
 10. **Authentic Technology Brand Logos:**
     - Always use verified brand SVG logos retaining their official color identities (e.g. React Cyan `#61DAFB`, TS Blue `#3178C6`, JS Yellow `#F7DF1E`, Tailwind Cyan `#06B6D4`, Vite Purple/Yellow, Laravel Red `#FF2D20`, Node Green `#5FA04E`, Git Orange `#F05032`, etc.).
     - Never replace tech logos with generic Lucide icons or force monochrome grayscale/invert filters.
-
+11. **Strict Project Content & Data Integrity:**
+    - Always follow `design-system/PROJECT-CONTENT-RULES.md`.
+    - Never invent metrics, client names, adoption numbers, testimonials, or fake public deployment URLs.
+    - Never include confidential or private projects in the public dataset (`src/data/projects.ts`).
+    - Keep repository URLs and live deployment URLs strictly separated.
+    - Validate project schema with `npm run validate:projects` before building.
+12. **FuzzyText Not-Found & Runtime Error Standard:**
+    - Use the shared React Bits `FuzzyText` treatment (`src/components/react-bits/FuzzyText.tsx`) for applicable missing-page (404) and runtime-error (500) interfaces.
+    - Whenever a new public route or route segment is added, reuse the global not-found design and error presentation.
+    - Always provide semantic headings and accessible text (`sr-only`) alongside the canvas display.
+    - Keep recovery links (`Back to Home`, `Explore Projects`, or `Try Again` reset callback) functional.
+    - Maintain ink black `#0C0D0A`, ivory foreground `#F2F0E9`, and signal lime `#D4FF69` accents without bright rainbow chromatic aberrations.
+    - Do not use `FuzzyText` on standard successful pages.
