@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import React, { useEffect, useRef, type CSSProperties } from 'react';
@@ -45,8 +44,8 @@ const MAX_CLICKS = 10;
 const INTRO_SECONDS = 1.8;
 const SHAPES = { square: 0, circle: 1, triangle: 2, diamond: 3, cross: 4, ring: 5 };
 const HOVERS = { none: 0, grow: 1, reveal: 2 };
-const bayer2 = (x, y) => (Math.floor(x) / 2 + Math.floor(y) * Math.floor(y) * 0.75) % 1;
-const bayer8 = (x, y) => (bayer2(x / 4, y / 4) * 0.25 + bayer2(x / 2, y / 2)) * 0.25 + bayer2(x, y);
+const bayer2 = (x: number, y: number) => (Math.floor(x) / 2 + Math.floor(y) * Math.floor(y) * 0.75) % 1;
+const bayer8 = (x: number, y: number) => (bayer2(x / 4, y / 4) * 0.25 + bayer2(x / 2, y / 2)) * 0.25 + bayer2(x, y);
 const BAYER_TABLE = Array.from({ length: 64 }, (_, i) => bayer8(i % 8, Math.floor(i / 8)).toFixed(6)).join(', ');
 const RANGE_MIN = -6;
 const RANGE_MAX = 10;
@@ -413,9 +412,9 @@ void main() {
   fragColor = vec4(premul, alpha);
 }`;
 
-const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
-const compile = (gl, type, source) => {
+const compile = (gl: WebGL2RenderingContext, type: number, source: string) => {
   const shader = gl.createShader(type);
   if (!shader) return null;
   gl.shaderSource(shader, source);
@@ -425,7 +424,8 @@ const compile = (gl, type, source) => {
   return null;
 };
 
-const link = (gl, fragmentSource) => {
+interface ShaderProgram { program: WebGLProgram; uniforms: Record<string, WebGLUniformLocation | null>; }
+const link = (gl: WebGL2RenderingContext, fragmentSource: string): ShaderProgram | null => {
   const vertex = compile(gl, gl.VERTEX_SHADER, VERTEX);
   const fragment = compile(gl, gl.FRAGMENT_SHADER, fragmentSource);
   const program = gl.createProgram();
@@ -439,7 +439,7 @@ const link = (gl, fragmentSource) => {
     gl.deleteProgram(program);
     return null;
   }
-  const uniforms = {};
+  const uniforms: Record<string, WebGLUniformLocation | null> = {};
   const count = gl.getProgramParameter(program, gl.ACTIVE_UNIFORMS);
   for (let i = 0; i < count; i++) {
     const info = gl.getActiveUniform(program, i);
@@ -452,7 +452,7 @@ const link = (gl, fragmentSource) => {
 
 const colorCache = new Map();
 
-const hexToRgb = hex => {
+const hexToRgb = (hex: string | number) => {
   const key = String(hex);
   const cached = colorCache.get(key);
   if (cached) return cached;
@@ -462,7 +462,7 @@ const hexToRgb = hex => {
   return rgb;
 };
 
-const parseHex = hex => {
+const parseHex = (hex: string | number) => {
   let h = String(hex || '#ffffff')
     .replace('#', '')
     .trim();
@@ -486,7 +486,7 @@ const randomFloat = () => {
   return Math.random();
 };
 
-const invert3 = m => {
+const invert3 = (m: number[]) => {
   const [a, b, c, d, e, f, g, h, i] = m;
   const A = e * i - f * h;
   const B = -(d * i - f * g);
@@ -505,7 +505,7 @@ const invert3 = m => {
   ];
 };
 
-const multiply3 = (x, y) => {
+const multiply3 = (x: number[], y: number[]) => {
   const out = new Array(9);
   for (let r = 0; r < 3; r++) {
     for (let c = 0; c < 3; c++) {
@@ -515,7 +515,7 @@ const multiply3 = (x, y) => {
   return out;
 };
 
-const planeFor = (tiltX, tiltY, width, height) => {
+const planeFor = (tiltX: number, tiltY: number, width: number, height: number) => {
   const ax = (tiltX * Math.PI) / 180;
   const ay = (tiltY * Math.PI) / 180;
   const depth = Math.max(width, height) * 1.25;
@@ -607,8 +607,11 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
     lightMode,
     dpr
   };
-  const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+  type Settings = typeof settings;
+  const settingsRef = useRef<Settings>(settings);
+  useEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const container = containerRef.current;
@@ -628,7 +631,7 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
     const mu = mainShader.uniforms;
     const vao = gl.createVertexArray();
 
-    const makeTexture = filter => {
+    const makeTexture = (filter: number) => {
       const texture = gl.createTexture();
       gl.bindTexture(gl.TEXTURE_2D, texture);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
@@ -648,7 +651,7 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
     gl.bindFramebuffer(gl.FRAMEBUFFER, null);
 
     const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
-    const view = { width: 1, height: 1, ratio: 1, plane: null, tiltKey: '' };
+    const view: { width: number; height: number; ratio: number; plane: number[] | null; tiltKey: string } = { width: 1, height: 1, ratio: 1, plane: null, tiltKey: '' };
     const cells = { x: 0, y: 0, w: 1, h: 1, key: '' };
     const pointer = { x: 0, y: 0, inside: false };
     const mouse = { x: 0, y: 0, ready: false };
@@ -672,9 +675,9 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
     let visible = true;
     let quiet = 0;
 
-    const patternTime = s => timeOffset + elapsed * s.speed;
+    const patternTime = (s: Settings) => timeOffset + elapsed * s.speed;
 
-    const layoutCells = s => {
+    const layoutCells = (s: Settings) => {
       const ps = s.pixelSize * view.ratio;
       const cps = 8 * ps;
       const w = canvas.width;
@@ -736,7 +739,7 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
 
     const planeClicks = new Float32Array(MAX_CLICKS * 2);
 
-    const stepCells = (s, decay) => {
+    const stepCells = (s: Settings, decay: number) => {
       for (let k = 0; k < MAX_CLICKS; k++) {
         if (clickPos[k * 2] < 0) {
           planeClicks[k * 2] = -1;
@@ -822,7 +825,7 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
       gl.bindVertexArray(null);
     };
 
-    const toPlane = (x, y) => {
+    const toPlane = (x: number, y: number) => {
       const m = view.plane;
       if (!m) return [x, y];
       const h = canvas.height;
@@ -832,7 +835,7 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
       return [(m[0] * x + m[1] * cy + m[2]) / z, h - (m[3] * x + m[4] * cy + m[5]) / z];
     };
 
-    const updatePlane = s => {
+    const updatePlane = (s: Settings) => {
       view.plane = s.tiltX || s.tiltY ? planeFor(s.tiltX, s.tiltY, canvas.width, canvas.height) : null;
       view.tiltKey = `${s.tiltX}:${s.tiltY}:${canvas.width}:${canvas.height}`;
     };
@@ -856,7 +859,7 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
       wake();
     };
 
-    const frame = now => {
+    const frame = (now: number) => {
       raf = 0;
       const s = settingsRef.current;
       if (!visible && s.autoPauseOffscreen) return;
@@ -908,14 +911,14 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
       }
     }
 
-    const locate = event => {
+    const locate = (event: PointerEvent) => {
       const rect = container.getBoundingClientRect();
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
       return { x, y, inside: x >= 0 && y >= 0 && x <= rect.width && y <= rect.height };
     };
 
-    const onPointerMove = event => {
+    const onPointerMove = (event: PointerEvent) => {
       const { x, y, inside } = locate(event);
       const was = pointer.inside;
       pointer.inside = inside;
@@ -930,7 +933,7 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
       if (inside || was) wake();
     };
 
-    function addRipple(x, y) {
+    function addRipple(x: number, y: number) {
       clickPos[clickIndex * 2] = x * view.ratio;
       clickPos[clickIndex * 2 + 1] = (view.height - y) * view.ratio;
       clickAt[clickIndex] = clock;
@@ -938,7 +941,7 @@ export const PixelBlast: React.FC<PixelBlastProps> = ({
       wake();
     }
 
-    const onPointerDown = event => {
+    const onPointerDown = (event: PointerEvent) => {
       const s = settingsRef.current;
       const { x, y, inside } = locate(event);
       if (!inside || reduce || !s.enableRipples) return;

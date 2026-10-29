@@ -2,14 +2,15 @@
 
 import React, { useState } from "react";
 import { siteConfig } from "@/data/site-config";
+import { ensureAbsoluteUrl } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import Galaxy from "@/components/react-bits/Galaxy";
+import { DeferredMount } from "@/components/ui/DeferredMount";
 import { Copy, Check, ArrowUpRight, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import {
-  containerStaggerVariants,
   fadeInUpVariants,
   snappySpring,
   editorialTransition,
@@ -27,6 +28,9 @@ export function ContactSection() {
     }
   };
 
+  const githubUrl = ensureAbsoluteUrl(siteConfig.contact.github);
+  const linkedinUrl = ensureAbsoluteUrl(siteConfig.contact.linkedin);
+
   return (
     <section id="contact" className="py-16 sm:py-20 md:py-24 bg-[#111210] relative overflow-hidden editorial-grain">
       {/* 1. Base Decorative Layer: React Bits Galaxy for cosmic collaboration beacon */}
@@ -34,7 +38,8 @@ export function ContactSection() {
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden bg-[#111210]"
         aria-hidden="true"
       >
-        <Galaxy
+        <DeferredMount className="contents">
+          <Galaxy
           density={1}
           glowIntensity={0.3}
           flareIntensity={0.4}
@@ -45,7 +50,8 @@ export function ContactSection() {
           transparent={false}
           backgroundColor="#111210"
           starColors={["#D4FF69", "#F2F0E9", "#B6DB61", "#8E9086"]}
-        />
+          />
+        </DeferredMount>
         {/* Subtle top and bottom seam fades to integrate smoothly with neighbor sections */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#111210] via-transparent to-[#0D0E0C] pointer-events-none" />
       </div>
@@ -123,9 +129,9 @@ export function ContactSection() {
             variants={fadeInUpVariants}
             className="pt-8 flex flex-wrap items-center justify-center gap-6 text-sm font-mono text-[#8E9086]"
           >
-            {siteConfig.contact.github && (
+            {githubUrl && (
               <a
-                href={siteConfig.contact.github}
+                href={githubUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#F2F0E9] transition-colors"
@@ -133,9 +139,9 @@ export function ContactSection() {
                 GitHub Profile ↗
               </a>
             )}
-            {siteConfig.contact.linkedin && (
+            {linkedinUrl && (
               <a
-                href={siteConfig.contact.linkedin}
+                href={linkedinUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#F2F0E9] transition-colors"

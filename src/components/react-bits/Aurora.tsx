@@ -3,7 +3,6 @@
 import React, { useEffect, useRef } from "react";
 
 interface AuroraProps {
-  colorStops?: string[];
   amplitude?: number;
   speed?: number;
   blend?: number;
@@ -18,7 +17,6 @@ interface AuroraProps {
  * Lightweight, GPU-rendered, non-blocking (pointer-events-none).
  */
 export function Aurora({
-  colorStops = ["#111210", "#182216", "#263623", "#D4FF69"],
   amplitude = 1.0,
   speed = 0.5,
   blend = 0.6,

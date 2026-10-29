@@ -41,9 +41,9 @@ export const siteConfig: SiteConfig = {
   identity: {
     name: "Andyto",
     role: "Product-minded Software Engineer",
-    portrait: "/images/profile/andyto-portrait.webp",
+    portrait: "/images/profile/andyto-portrait1.webp",
   },
-  portrait: "/images/profile/andyto-portrait.webp",
+  portrait: "/images/profile/andyto-portrait1.webp",
   disciplines: [
     "Frontend Engineering",
     "UI/UX Implementation",
@@ -61,7 +61,7 @@ export const siteConfig: SiteConfig = {
   contact: {
     email: "otydna1307@gmail.com",
     github: "https://github.com/dytoandyto",
-    linkedin: "www.linkedin.com/in/andyto-hudianto-a949022bb",
+    linkedin: "https://www.linkedin.com/in/andyto-hudianto-a949022bb",
   },
   seo: {
     title: "Andyto — Product-minded Software Engineer",

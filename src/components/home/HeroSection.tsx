@@ -9,7 +9,6 @@ import { AnimatedHeadline } from "@/components/react-bits/AnimatedHeadline";
 import ShapeGrid from "@/components/react-bits/ShapeGrid";
 import Lanyard from "./Lanyard";
 import { motion } from "motion/react";
-import { ArrowDown } from "lucide-react";
 import {
   containerStaggerVariants,
   fadeInUpVariants,

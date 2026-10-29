@@ -1,4 +1,3 @@
-// @ts-nocheck
 'use client';
 
 import React, { useEffect, useRef, type HTMLAttributes } from 'react';
@@ -318,7 +317,9 @@ export const DarkVeil = ({
     dpr
   };
   const settingsRef = useRef(settings);
-  settingsRef.current = settings;
+  useEffect(() => {
+    settingsRef.current = settings;
+  });
 
   useEffect(() => {
     const container = containerRef.current;

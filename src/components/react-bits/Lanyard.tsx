@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import NextImage from 'next/image';
 import type { CSSProperties } from 'react';
 import * as THREE from 'three';
 
@@ -1038,7 +1039,7 @@ const Lanyard = ({
     try {
       renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'high-performance' });
     } catch {
-      setWebGlFailed(true);
+      queueMicrotask(() => setWebGlFailed(true));
       return undefined;
     }
     renderer.setClearColor(0x000000, 0);
@@ -1585,13 +1586,12 @@ const Lanyard = ({
           </div>
           <div className="flex gap-3 items-center py-2">
             <div className="w-16 h-20 rounded-lg overflow-hidden border border-[#252A22] bg-[#111210] flex-shrink-0">
-              <img
-                src={portraitImage || frontImage || '/images/profile/andyto-portrait.webp'}
+              <NextImage
+                src={portraitImage || frontImage || '/images/profile/andyto-portrait1.webp'}
                 alt="Portrait"
+                width={64}
+                height={80}
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  (e.target as HTMLElement).style.display = 'none';
-                }}
               />
             </div>
             <div className="font-mono text-left">

@@ -10,6 +10,7 @@ import { StatusBadge } from "@/components/ui/StatusBadge";
 import { ProjectMockup } from "@/components/projects/ProjectMockup";
 import { InteractiveProjectCard } from "@/components/react-bits/InteractiveProjectCard";
 import { DarkVeil } from "@/components/react-bits/DarkVeil";
+import { DeferredMount } from "@/components/ui/DeferredMount";
 import { motion } from "motion/react";
 import {
   snappySpring,
@@ -31,7 +32,8 @@ export function ProjectsSection() {
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
-        <DarkVeil
+        <DeferredMount className="contents">
+          <DarkVeil
           color="#1A2818"
           speed={0.22}
           scale={1.2}
@@ -46,6 +48,7 @@ export function ProjectsSection() {
           mouseInteraction={true}
           mouseStrength={0.5}
         />
+        </DeferredMount>
         {/* Subtle dark gradient overlay to frame project cards cleanly */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#141512] via-[#141512]/65 to-[#141512] pointer-events-none" />
       </div>

@@ -55,7 +55,7 @@ export function SiteHeader() {
               {siteConfig.availability && (
                 <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-[rgba(242,240,233,0.04)] border border-[rgba(242,240,233,0.1)] text-xs font-mono text-[#8E9086]">
                   <span className="w-1.5 h-1.5 rounded-full bg-[#D4FF69] shadow-[0_0_8px_rgba(212,255,105,0.7)]" />
-                  <span className="truncate max-w-[240px]">
+                  <span className="truncate max-w-[340px] xl:max-w-none">
                     {siteConfig.availability.label}
                   </span>
                 </div>

@@ -3,6 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
+import { ensureAbsoluteUrl } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { ScrollToTop } from "@/components/ui/ScrollToTop";
 import { motion } from "motion/react";
@@ -14,15 +15,9 @@ import {
 import { ArrowUpRight } from "lucide-react";
 
 export function SiteFooter() {
-  const [currentYear, setCurrentYear] = React.useState<number>(2026);
-
-  React.useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
-
-  const linkedinUrl = siteConfig.contact.linkedin?.startsWith("http")
-    ? siteConfig.contact.linkedin
-    : `https://${siteConfig.contact.linkedin}`;
+  const currentYear = 2026;
+  const linkedinUrl = ensureAbsoluteUrl(siteConfig.contact.linkedin);
+  const githubUrl = ensureAbsoluteUrl(siteConfig.contact.github);
 
   return (
     <footer className="w-full bg-[#0E0F0D] text-[#F2F0E9] border-t border-[rgba(242,240,233,0.08)] py-16 md:py-20">
@@ -98,10 +93,10 @@ export function SiteFooter() {
                   </a>
                 </motion.li>
               )}
-              {siteConfig.contact.github && (
+              {githubUrl && (
                 <motion.li whileHover={{ x: 3 }} transition={snappySpring}>
                   <a
-                    href={siteConfig.contact.github}
+                    href={githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-[#9A9C92] hover:text-[#F2F0E9] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4FF69] rounded py-0.5 inline-flex items-center gap-1"
@@ -111,7 +106,7 @@ export function SiteFooter() {
                   </a>
                 </motion.li>
               )}
-              {siteConfig.contact.linkedin && (
+              {linkedinUrl && (
                 <motion.li whileHover={{ x: 3 }} transition={snappySpring}>
                   <a
                     href={linkedinUrl}

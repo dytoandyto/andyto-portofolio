@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { projects } from "@/data/projects";
+import { ensureAbsoluteUrl } from "@/lib/utils";
 import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { StatusBadge } from "@/components/ui/StatusBadge";
@@ -12,6 +13,7 @@ import { ContactSection } from "@/components/home/ContactSection";
 import { Button } from "@/components/ui/Button";
 import {
   ArrowLeft,
+  ArrowUpRight,
   CheckCircle2,
   Target,
   AlertTriangle,
@@ -57,6 +59,11 @@ export default async function ProjectDetailPage({ params }: PageProps) {
   if (!project) {
     notFound();
   }
+
+  const liveUrl = project.liveUrl ? ensureAbsoluteUrl(project.liveUrl) : null;
+  const repositoryUrl = project.repositoryUrl
+    ? ensureAbsoluteUrl(project.repositoryUrl)
+    : null;
 
   return (
     <article className="pt-32 md:pt-40">
@@ -105,6 +112,34 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <p className="text-base sm:text-lg text-[#8E9086] leading-[1.65] font-normal">
             {project.summary}
           </p>
+
+          {/* Optional Project Direct Links */}
+          {(liveUrl || repositoryUrl) && (
+            <div className="flex flex-wrap items-center gap-3 pt-2">
+              {liveUrl && (
+                <a
+                  href={liveUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#D4FF69] text-[#111210] font-semibold text-xs font-mono hover:bg-[#c2f34e] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B6DB61]"
+                >
+                  <span>Live Preview</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              )}
+              {repositoryUrl && (
+                <a
+                  href={repositoryUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#181916] border border-[rgba(242,240,233,0.12)] text-xs font-mono text-[#F2F0E9] hover:border-[#D4FF69] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#B6DB61]"
+                >
+                  <span>Source Code</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 text-[#8E9086]" />
+                </a>
+              )}
+            </div>
+          )}
 
           {/* Quick Metadata Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 pt-6 border-t border-[rgba(242,240,233,0.08)]">

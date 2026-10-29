@@ -171,15 +171,10 @@ export const Particles = ({
         });
       }
     };
-
-    let tick = 0;
-
     const render = () => {
       if (!isVisible || document.hidden || paused) return;
 
       ctx.clearRect(0, 0, width, height);
-
-      tick++;
       const motionScale = reduceMotion ? 0 : 1;
 
       // Mouse lerp

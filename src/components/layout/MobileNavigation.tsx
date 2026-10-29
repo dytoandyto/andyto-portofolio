@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { siteConfig } from "@/data/site-config";
+import { ensureAbsoluteUrl } from "@/lib/utils";
 import { X, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
@@ -125,7 +126,7 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
             <div className="flex items-center justify-between text-sm font-mono text-[#8E9086]">
               {siteConfig.contact.github && (
                 <a
-                  href={siteConfig.contact.github}
+                  href={ensureAbsoluteUrl(siteConfig.contact.github)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#F2F0E9] transition-colors"
@@ -135,7 +136,7 @@ export function MobileNavigation({ isOpen, onClose }: MobileNavigationProps) {
               )}
               {siteConfig.contact.linkedin && (
                 <a
-                  href={siteConfig.contact.linkedin}
+                  href={ensureAbsoluteUrl(siteConfig.contact.linkedin)}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#F2F0E9] transition-colors"

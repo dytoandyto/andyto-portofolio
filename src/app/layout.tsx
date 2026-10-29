@@ -86,6 +86,12 @@ export default function RootLayout({
       className={`${manrope.variable} ${ibmPlexMono.variable} ${newsreader.variable} dark h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans bg-[#111210] text-[#F2F0E9] selection:bg-[#D4FF69] selection:text-[#111210] relative">
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#D4FF69] focus:text-[#111210] focus:font-semibold focus:rounded-md focus:shadow-xl focus:outline-none focus:ring-2 focus:ring-[#111210]"
+        >
+          Skip to main content
+        </a>
         <SmoothScroll>
           <ScrollProgress />
           <SiteHeader />

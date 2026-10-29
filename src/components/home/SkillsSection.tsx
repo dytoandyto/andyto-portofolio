@@ -5,6 +5,7 @@ import { Container } from "@/components/ui/Container";
 import { Eyebrow } from "@/components/ui/Eyebrow";
 import { InteractiveSkillCard } from "@/components/react-bits/InteractiveSkillCard";
 import MicroSlats from "@/components/react-bits/MicroSlats";
+import { DeferredMount } from "@/components/ui/DeferredMount";
 import { motion } from "motion/react";
 import {
   snappySpring,
@@ -98,7 +99,8 @@ export function SkillsSection() {
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
-        <MicroSlats
+        <DeferredMount className="contents">
+          <MicroSlats
           preset="tide"
           color="#252A22"
           glintColor="#D4FF69"
@@ -125,6 +127,7 @@ export function SkillsSection() {
           intro
           introDuration={1.2}
         />
+        </DeferredMount>
         {/* Soft edge seams so section borders blend seamlessly while preserving slat visibility */}
         <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#111210] to-transparent pointer-events-none" />
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#111210] to-transparent pointer-events-none" />

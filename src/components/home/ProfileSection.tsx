@@ -6,14 +6,11 @@ import { Eyebrow } from "@/components/ui/Eyebrow";
 import { Button } from "@/components/ui/Button";
 import { ScrollRevealText } from "@/components/react-bits/ScrollRevealText";
 import Threads from "@/components/react-bits/Threads";
+import { DeferredMount } from "@/components/ui/DeferredMount";
 import { siteConfig } from "@/data/site-config";
 import { motion } from "motion/react";
-import {
-  containerStaggerVariants,
-  fadeInUpVariants,
-  editorialTransition,
-} from "@/components/motion/motion-variants";
-import { MapPin, Code2, Sparkles, CheckCircle2 } from "lucide-react";
+import { editorialTransition } from "@/components/motion/motion-variants";
+import { MapPin } from "lucide-react";
 
 export function ProfileSection() {
   const approaches = [
@@ -33,21 +30,23 @@ export function ProfileSection() {
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
-        <Threads
-          color="#303A27"
-          accentColor="#D4FF69"
-          amplitude={1.2}
-          distance={0.35}
-          enableMouseInteraction={true}
-          lineCount={65}
-          thickness={0.6}
-          softness={1.2}
-          speed={0.35}
-          waves={1.2}
-          brightness={1.1}
-          fade={0.4}
-          opacity={0.45}
-        />
+        <DeferredMount className="contents">
+          <Threads
+            color="#303A27"
+            accentColor="#D4FF69"
+            amplitude={1.2}
+            distance={0.35}
+            enableMouseInteraction={true}
+            lineCount={65}
+            thickness={0.6}
+            softness={1.2}
+            speed={0.35}
+            waves={1.2}
+            brightness={1.1}
+            fade={0.4}
+            opacity={0.45}
+          />
+        </DeferredMount>
         {/* Subtle dark gradient overlay to preserve reading focus on editorial copy */}
         <div className="absolute inset-0 bg-gradient-to-b from-[#141512] via-[#141512]/60 to-[#141512] pointer-events-none" />
       </div>

@@ -4,7 +4,6 @@ import React from "react";
 import LogoLoop, { LogoItem } from "@/components/react-bits/LogoLoop";
 import DotGrid from "@/components/react-bits/DotGrid";
 import { Container } from "@/components/ui/Container";
-import { Code2 } from "lucide-react";
 import { motion } from "motion/react";
 import { editorialTransition } from "@/components/motion/motion-variants";
 
@@ -38,13 +37,13 @@ export function TechMarquee() {
     {
       title: "Next.js",
       href: "https://nextjs.org",
-      ariaLabel: "Next.js - The React Framework for the Web",
+      ariaLabel: "Next.js - The React framework for the web",
       node: <NextjsLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
       title: "TypeScript",
       href: "https://www.typescriptlang.org",
-      ariaLabel: "TypeScript - Strongly typed programming language that builds on JavaScript",
+      ariaLabel: "TypeScript - JavaScript with syntax for types",
       node: <TypescriptLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
@@ -61,32 +60,32 @@ export function TechMarquee() {
     },
     {
       title: "Vite",
-      href: "https://vite.dev",
-      ariaLabel: "Vite - Next Generation Frontend Tooling",
+      href: "https://vitejs.dev",
+      ariaLabel: "Vite - Next generation frontend tooling",
       node: <ViteLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
       title: "PostgreSQL",
       href: "https://www.postgresql.org",
-      ariaLabel: "PostgreSQL - Open Source Relational Database",
+      ariaLabel: "PostgreSQL - The world's most advanced open source relational database",
       node: <PostgresqlLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
-      title: "Prisma ORM",
+      title: "Prisma",
       href: "https://www.prisma.io",
-      ariaLabel: "Prisma ORM - Next-generation Node.js and TypeScript ORM",
+      ariaLabel: "Prisma - Next-generation ORM for Node.js & TypeScript",
       node: <PrismaLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
       title: "Laravel",
       href: "https://laravel.com",
-      ariaLabel: "Laravel - The PHP Framework for Web Artisans",
+      ariaLabel: "Laravel - The PHP framework for web artisans",
       node: <LaravelLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
       title: "PHP",
       href: "https://www.php.net",
-      ariaLabel: "PHP - Hypertext Preprocessor",
+      ariaLabel: "PHP - General-purpose scripting language suited for web development",
       node: <PhpLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
@@ -98,25 +97,25 @@ export function TechMarquee() {
     {
       title: "Node.js",
       href: "https://nodejs.org",
-      ariaLabel: "Node.js - JavaScript runtime environment",
+      ariaLabel: "Node.js - JavaScript runtime built on Chrome's V8 JavaScript engine",
       node: <NodejsLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
       title: "Figma",
-      href: "https://figma.com",
+      href: "https://www.figma.com",
       ariaLabel: "Figma - The collaborative interface design tool",
       node: <FigmaLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
       title: "Git",
       href: "https://git-scm.com",
-      ariaLabel: "Git - Fast distributed revision control system",
+      ariaLabel: "Git - Fast, scalable, distributed revision control system",
       node: <GitLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
       title: "GitHub",
       href: "https://github.com",
-      ariaLabel: "GitHub - Development and version control platform",
+      ariaLabel: "GitHub - Development platform for collaborative software engineering",
       node: <GithubLogo className="h-7 sm:h-8 md:h-[32px] w-auto shrink-0 transition-transform duration-300 hover:scale-110" />,
     },
     {
@@ -128,14 +127,18 @@ export function TechMarquee() {
   ];
 
   return (
-    <section className="relative py-5 sm:py-6 md:py-7 border-y border-[rgba(242,240,233,0.08)] bg-[#0C0D0A]/90 backdrop-blur-md overflow-hidden">
-      {/* React Bits DotGrid Background: Restrained tactile dot matrix for technical continuity */}
+    <section
+      id="tech-stack"
+      className="py-6 sm:py-7 md:py-8 bg-[#0C0D0A] border-y border-[rgba(242,240,233,0.06)] relative overflow-hidden"
+      aria-label="Core Engineering Technologies"
+    >
+      {/* 1. Base Decorative Layer: Tactile DotGrid background */}
       <div
         className="absolute inset-0 w-full h-full pointer-events-none z-0 overflow-hidden"
         aria-hidden="true"
       >
         <DotGrid
-          dotSize={2}
+          dotSize={1.5}
           gap={22}
           baseColor="#1F241C"
           activeColor="#D4FF69"
@@ -171,7 +174,6 @@ export function TechMarquee() {
             ariaLabel="Verified production technology stack brand logos"
           />
         </motion.div>
-
       </Container>
     </section>
   );
